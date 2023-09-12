@@ -1,0 +1,37 @@
+service: ssrserverless-angular
+
+plugins:
+  - serverless-apigw-binary
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  memorySize: 192
+  timeout: 10
+  region: eu-west-1
+
+package:
+  exclude:
+    - ./**
+  include:
+    - "node_modules/aws-serverless-express/**"
+    - "node_modules/binary-case/**"
+    - "node_modules/type-is/**"
+    - "node_modules/media-typer/**"
+    - "node_modules/mime-types/**"
+    - "node_modules/mime-db/**"
+    - "node_modules/@vendia/**"
+    - "dist/**"
+    - "lambda.js"
+
+custom:
+  apigwBinary:
+    types:
+      - "*/*"
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /
