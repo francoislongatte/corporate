@@ -1,4 +1,4 @@
-service: ssrserverless-angular
+service: ${param:env}-ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
