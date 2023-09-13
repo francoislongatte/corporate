@@ -17,12 +17,11 @@ jobs:
         node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
-      - name: ⚙⚙⚙ Use Node.js ${{ matrix.node-version }} ⚙⚙⚙
+      - name: 🧬🧬🧬 Use Node.js ${{ matrix.node-version }} - build project 🧬🧬🧬
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - name: 🧬🧬🧬 build project 🧬🧬🧬
       - run: npm run build:ssr
       - name: ⚡⚡⚡ serverless Deploy ⚡⚡⚡
         uses: serverless/github-action@v3.2
