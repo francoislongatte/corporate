@@ -6,17 +6,20 @@ on:
       - master
 
 jobs:
-  deploy:
+  PROD:
     permissions:
       id-token: write
       contents: read
-    name: deploy
+    name: deploy on prod
     runs-on: ubuntu-latest
+    environnement: PROD
+    needs: STAGING
     strategy:
       matrix:
         node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Deploy on production environnement
       - name: 🧬🧬🧬 Use Node.js ${{ matrix.node-version }} - build project 🧬🧬🧬
         uses: actions/setup-node@v3
         with:
