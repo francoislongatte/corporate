@@ -31,7 +31,7 @@ jobs:
       - name: ⚡⚡⚡ serverless Deploy ⚡⚡⚡
         uses: serverless/github-action@v3.2
         with:
-          args: deploy
+          args: deploy --stage prod
           param:
         env:
           env: ${{env.NAME}}
