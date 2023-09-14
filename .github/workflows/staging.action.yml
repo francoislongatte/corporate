@@ -1,5 +1,5 @@
 name: Deploy master branch
-run-name: ${{ github.actor }} is deploying in production🚀
+run-name: ${{ github.actor }} is deploying in staging 🚀
 on:
   push:
     branches:
