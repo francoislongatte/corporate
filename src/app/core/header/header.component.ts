@@ -5,5 +5,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone: true,
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {},
 })
 export class HeaderComponent {}
