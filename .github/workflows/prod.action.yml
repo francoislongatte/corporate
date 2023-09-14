@@ -13,7 +13,7 @@ jobs:
     name: deploy on prod
     runs-on: ubuntu-latest
     env:
-      NAME: "STAGING"
+      NAME: "PROD"
     strategy:
       matrix:
         node-version: [18.x]
