@@ -13,7 +13,7 @@
     <a
       *ngFor="let navigation of navigations"
       class="font-medium text-blue-600 sm:py-6 dark:text-blue-500"
-      href="#"
+      [href]="navigation.link"
       aria-current="page"
       >{{ navigation.label }}</a
     >

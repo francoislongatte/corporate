@@ -7,5 +7,8 @@ import { NgFor } from '@angular/common';
   imports: [NgFor],
   templateUrl: './icon-section.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    id: 'services',
+  },
 })
 export class IconSectionComponent {}

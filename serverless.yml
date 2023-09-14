@@ -1,4 +1,5 @@
-service: ssrserverless-angular
+service: ${opt:stage}-ssrserverless-angular
+
 
 plugins:
   - serverless-apigw-binary
