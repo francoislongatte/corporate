@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Serverless
-/.serverless/
+/.serverless
