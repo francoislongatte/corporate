@@ -1,4 +1,4 @@
-name: Deploy master branch
+name: Deploy develop branch
 run-name: ${{ github.actor }} is deploying in development 🚀
 on:
   push:
