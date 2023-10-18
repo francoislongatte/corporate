@@ -6,6 +6,7 @@ import { IconSectionComponent } from './page-index/icon-section/icon-section.com
 import { PriceComponent } from './page-index/price/price.component';
 import { ServicesComponent } from './page-index/services/services.component';
 import { TestimonialsComponent } from './page-index/testimonials/testimonials.component';
+import { CardComponent } from './page-index/icon-section/card/card.component';
 
 @NgModule({
   imports: [
@@ -25,5 +26,6 @@ import { TestimonialsComponent } from './page-index/testimonials/testimonials.co
     ServicesComponent,
     PriceComponent,
   ],
+  declarations: [],
 })
 export class CoreModule {}
