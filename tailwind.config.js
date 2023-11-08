@@ -7,6 +7,9 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      sans: ['"Inter", sans-serif'],
+    },
     extend: {
       keyframes: {
         scroll: {
@@ -15,13 +18,16 @@ module.exports = {
         },
       },
       animation: {
-        "spin-low": "scroll 10s linear  infinite",
+        "spin-low": "scroll 60s linear  infinite",
       },
       textUnderlineOffset: {
         16: "16px",
       },
       width: {
         scroll: "calc( 100% * 2 )",
+      },
+      height: {
+        card: "500px",
       },
       padding: {
         "1/2": "50%",

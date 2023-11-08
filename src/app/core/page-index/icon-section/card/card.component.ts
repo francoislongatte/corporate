@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
+import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
   standalone: true,
+  imports: [NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'w-64 h-64 rounded text-center flex-1 bg-blue-500',
+    class: 'h-card rounded-2xl text-center flex-1 overflow-hidden',
   },
 })
 export class CardComponent {

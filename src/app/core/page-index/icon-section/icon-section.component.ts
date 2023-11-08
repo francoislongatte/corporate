@@ -10,7 +10,7 @@ import { CardComponent } from './card/card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     id: 'services',
-    class: 'bg-white m-auto overflow-hidden relative justify-center',
+    class: 'bg-white m-auto pt-8 overflow-hidden relative justify-center',
   },
 })
 export class IconSectionComponent {}
