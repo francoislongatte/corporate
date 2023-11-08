@@ -2,7 +2,7 @@ import 'zone.js/dist/zone-node';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
-import { AppServerModule } from './src/main.server';
+import { app as appServer } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 export const app = express();
@@ -15,7 +15,7 @@ const indexHtml = existsSync(join(distFolder, 'index.original.html'))
 app.engine(
   'html',
   ngExpressEngine({
-    bootstrap: AppServerModule,
+    bootstrap: appServer,
   })
 );
 

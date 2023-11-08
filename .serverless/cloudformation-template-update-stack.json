@@ -74,7 +74,7 @@
     "ApiLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-api"
+        "LogGroupName": "/aws/lambda/dev-ssrserverless-angular-dev-api"
       }
     },
     "IamRoleLambdaExecution": {
@@ -102,7 +102,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "ssrserverless-angular",
+                  "dev-ssrserverless-angular",
                   "dev",
                   "lambda"
                 ]
@@ -120,7 +120,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/dev-ssrserverless-angular-dev*:*"
                     }
                   ]
                 },
@@ -131,7 +131,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/dev-ssrserverless-angular-dev*:*:*"
                     }
                   ]
                 }
@@ -144,7 +144,7 @@
           "Fn::Join": [
             "-",
             [
-              "ssrserverless-angular",
+              "dev-ssrserverless-angular",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -162,11 +162,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1694282928671-2023-09-09T18:08:48.671Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/dev-ssrserverless-angular/dev/1699431424015-2023-11-08T08:17:04.015Z/dev-ssrserverless-angular.zip"
         },
         "Handler": "lambda.handler",
         "Runtime": "nodejs18.x",
-        "FunctionName": "ssrserverless-angular-dev-api",
+        "FunctionName": "dev-ssrserverless-angular-dev-api",
         "MemorySize": 192,
         "Timeout": 10,
         "Role": {
@@ -180,20 +180,20 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionPoPrX1GBUVpYAQXW7anErdfY7iYs9uxSaa8unQmbbk": {
+    "ApiLambdaVersionauF85sTxkt36KxXeGRKevEILRCKBtHw1sMdV5CReGA4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "TV8YJz9A/iWyexkswV5mUb9NeVLUGhtlyP06Ph93lYE="
+        "CodeSha256": "syyjtUvQn4YY4JppZVT7cQn5aYP/fwzOWsdsqQ2gpEo="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-ssrserverless-angular",
+        "Name": "dev-dev-ssrserverless-angular",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -312,7 +312,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1694282908722": {
+    "ApiGatewayDeployment1699431394883": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -369,16 +369,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-ssrserverless-angular-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-dev-ssrserverless-angular-dev-ServerlessDeploymentBucketName"
       }
     },
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionPoPrX1GBUVpYAQXW7anErdfY7iYs9uxSaa8unQmbbk"
+        "Ref": "ApiLambdaVersionauF85sTxkt36KxXeGRKevEILRCKBtHw1sMdV5CReGA4"
       },
       "Export": {
-        "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
+        "Name": "sls-dev-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -404,7 +404,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-ssrserverless-angular-dev-ServiceEndpoint"
+        "Name": "sls-dev-ssrserverless-angular-dev-ServiceEndpoint"
       }
     }
   }
