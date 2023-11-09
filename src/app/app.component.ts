@@ -6,6 +6,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { TimelineComponent } from './core/page-index/index/timeline/timeline.component';
 import { CapabilitiesComponent } from './core/page-index/index/capabilities/capabilities.component';
 import { IconSectionComponent } from './core/page-index/index/icon-section/icon-section.component';
+import { FaqComponent } from './core/page-index/index/faq/faq.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ import { IconSectionComponent } from './core/page-index/index/icon-section/icon-
     PriceComponent,
     TimelineComponent,
     CapabilitiesComponent,
+    FaqComponent,
   ],
   host: {
     class: 'block mt-20 grid grid-cols-12 gap-x-6',
