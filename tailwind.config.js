@@ -7,6 +7,15 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
+    },
+    container: {
+      center: true,
+      padding: "24px",
+    },
     fontFamily: {
       sans: ['"Inter", sans-serif'],
     },
@@ -35,8 +44,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require("preline/plugin")
-  ],
+  plugins: [require("@tailwindcss/forms"), require("preline/plugin")],
 };

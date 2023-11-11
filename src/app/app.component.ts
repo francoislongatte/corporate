@@ -23,7 +23,7 @@ import { FaqComponent } from './core/page-index/index/faq/faq.component';
     FaqComponent,
   ],
   host: {
-    class: 'block mt-20 grid grid-cols-12 gap-x-6',
+    class: '',
   },
 })
 export class AppComponent {

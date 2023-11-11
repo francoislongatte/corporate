@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   host: {
     id: 'work',
     class:
-      'top-0 flex flex-wrap relative justify-center items-center max-w-4xl  w-full bg-white text-sm  dark:bg-gray-800 dark:border-gray-700',
+      'flex flex-wrap relative justify-center items-center  w-full bg-white text-sm  dark:bg-gray-800 dark:border-gray-700',
   },
 })
 export class NavbarComponent {}
