@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
-import { PriceComponent } from './core/page-index/index/price/price.component';
-import { ServicesComponent } from './core/page-index/index/services/services.component';
-import { HeaderComponent } from './core/header/header.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
-import { TimelineComponent } from './core/page-index/index/timeline/timeline.component';
-import { CapabilitiesComponent } from './core/page-index/index/capabilities/capabilities.component';
-import { IconSectionComponent } from './core/page-index/index/icon-section/icon-section.component';
-import { FaqComponent } from './core/page-index/index/faq/faq.component';
+import { Component } from '@angular/core'
+import { NavbarComponent } from './core/navbar/navbar.component'
+import { CapabilitiesComponent } from './page/index/capabilities/capabilities.component'
+import { HeaderComponent } from './page/index/header/header.component'
+import { PriceComponent } from './page/index/price/price.component'
+import { ServicesComponent } from './page/index/services/services.component'
+import { TimelineComponent } from './page/index/timeline/timeline.component'
+import { FaqComponent } from './page/index/faq/faq.component'
+import { CarouselComponent } from './page/index/carousel/carousel.component'
+import { AfterComponent } from './page/index/after/after.component'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [
-    NavbarComponent,
-    HeaderComponent,
-    IconSectionComponent,
-    ServicesComponent,
-    PriceComponent,
-    TimelineComponent,
-    CapabilitiesComponent,
-    FaqComponent,
-  ],
-  host: {
-    class: '',
-  },
+	selector: 'main',
+	templateUrl: './app.component.html',
+	standalone: true,
+	imports: [
+		NavbarComponent,
+		HeaderComponent,
+		CarouselComponent,
+		ServicesComponent,
+		PriceComponent,
+		TimelineComponent,
+		CapabilitiesComponent,
+		FaqComponent,
+		AfterComponent
+	],
+	host: {
+		class: 'antialiased block bg-[#FFFEFC] lg:mt-20 mt-8 lg:px-6 px-4'
+	}
 })
 export class AppComponent {
-  title = 'angular-universal';
+	title = 'angular-universal'
 }

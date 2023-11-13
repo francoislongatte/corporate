@@ -1,0 +1,36 @@
+<div class="flex">
+	<p class="pr-4 text-xl font-semibold leading-none">Our capabilities</p>
+	<span class="block flex-1 border-b-2 border-stone-300"></span>
+</div>
+
+<div class="hs-accordion-group mt-5 md:mt-8" data-hs-accordion-always-open>
+	@for (item of data; track item.text; let idx = $index) {
+	<div class="hs-accordion" [id]="'heading-' + idx">
+		<button
+			class="hs-accordion-toggle inline-flex w-full items-center justify-between gap-x-3 rounded-lg py-5 text-start font-semibold md:py-8"
+			aria-controls="heading-one-collapse-one"
+		>
+			<span class="text-xl font-semibold md:text-3xl">{{ item.title }}</span>
+			<div class="flex items-center">
+				<span
+					class="flex h-6 w-6 items-center justify-center rounded-full border-2 text-base font-semibold md:h-12 md:w-12 md:text-3xl"
+				>
+					<ng-icon name="heroPlusSolid"></ng-icon>
+				</span>
+			</div>
+		</button>
+		<div
+			id="heading-one-collapse-one"
+			class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+			aria-labelledby="heading-one"
+		>
+			<p class="text-gray-800 dark:text-gray-200">
+				<em>This is the third item's accordion body.</em> It is hidden by default, until the
+				collapse plugin adds the appropriate classes that we use to style each element. These
+				classes control the overall appearance, as well as the showing and hiding via CSS
+				transitions.
+			</p>
+		</div>
+	</div>
+	}
+</div>

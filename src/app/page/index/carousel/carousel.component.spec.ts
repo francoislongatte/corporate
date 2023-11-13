@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IconSectionComponent } from './icon-section.component';
+import { IconSectionComponent } from './carousel.component';
 
 describe('IconSectionComponent', () => {
   let component: IconSectionComponent;

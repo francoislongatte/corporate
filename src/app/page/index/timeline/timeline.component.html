@@ -1,0 +1,25 @@
+<div class="flex">
+	<p class="pr-4 text-xl font-semibold leading-none">How does it work?</p>
+	<span class="block flex-1 border-b-2 border-stone-300"></span>
+</div>
+
+<ul class="mt-5 text-sm md:mt-8">
+	@for (item of data; track item.text; let idx = $index) {
+    <li class="py-5 md:py-8">
+      <div class="flex items-center">
+        <span
+          class="mr-4 flex h-6 w-6 items-center justify-center rounded-full bg-orange-500 text-base font-semibold text-black dark:bg-orange-500 md:h-12 md:w-12 md:text-3xl"
+        >
+          {{ idx }}
+        </span>
+        <p class="text-center text-xl font-semibold md:text-3xl">
+          {{ item.title }}
+        </p>
+      </div>
+
+      <p class="mt-4 text-base leading-relaxed md:text-xl md:leading-loose">
+        {{ item.text }}
+      </p>
+    </li>
+	}
+</ul>

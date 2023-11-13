@@ -12,5 +12,6 @@ import { NgOptimizedImage } from '@angular/common';
   },
 })
 export class CardComponent {
+  @Input() link!: string;
   @Input() count!: string;
 }
