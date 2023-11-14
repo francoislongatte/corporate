@@ -69,4 +69,4 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
 	run()
 }
 
-export default app
+export * from './src/main.server';

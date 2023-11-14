@@ -10,7 +10,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    name: deploy on prod
+    name: deploy on dev
     runs-on: ubuntu-latest
     env:
       NAME: "DEV"
