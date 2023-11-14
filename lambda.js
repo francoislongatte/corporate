@@ -21,7 +21,9 @@ const binaryMimeTypes = [
 	'image/svg+xml',
 	'application/x-font-ttf'
 ]
-console.log(server)
-server.app.use(awsServerlessExpressMiddleware.eventContext())
-const serverProxy = awsServerlessExpress.createServer(server.app, null, binaryMimeTypes)
+
+const app = server.app()
+console.log(app)
+app.use(awsServerlessExpressMiddleware.eventContext())
+const serverProxy = awsServerlessExpress.createServer(app, null, binaryMimeTypes)
 module.exports.handler = (event, context) => awsServerlessExpress.proxy(serverProxy, event, context)
