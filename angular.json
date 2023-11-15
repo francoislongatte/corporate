@@ -86,7 +86,9 @@
 					},
 					"configurations": {
 						"production": {
-							"outputHashing": "media"
+							"outputHashing": "media",
+							"sourceMap": false,
+							"optimization": true
 						},
 						"development": {
 							"buildOptimizer": false,
