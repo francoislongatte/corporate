@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "dev-ssrserverless-angular",
+    "service": "ssrserverless-angular",
     "serviceObject": {
-      "name": "dev-ssrserverless-angular"
+      "name": "ssrserverless-angular"
     },
     "provider": {
       "name": "aws",
@@ -10,6 +10,7 @@
       "memorySize": 192,
       "timeout": 10,
       "region": "eu-west-1",
+      "stackName": "dev-ssrserverless-angular",
       "stage": "dev",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -88,7 +89,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/dev-ssrserverless-angular-dev-api"
+              "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -116,7 +117,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "dev-ssrserverless-angular",
+                        "ssrserverless-angular",
                         "dev",
                         "lambda"
                       ]
@@ -134,7 +135,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/dev-ssrserverless-angular-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*"
                           }
                         ]
                       },
@@ -145,7 +146,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/dev-ssrserverless-angular-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*:*"
                           }
                         ]
                       }
@@ -158,7 +159,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "dev-ssrserverless-angular",
+                    "ssrserverless-angular",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -176,11 +177,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dev-ssrserverless-angular/dev/1699886084245-2023-11-13T14:34:44.245Z/dev-ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z/ssrserverless-angular.zip"
               },
               "Handler": "lambda.handler",
               "Runtime": "nodejs18.x",
-              "FunctionName": "dev-ssrserverless-angular-dev-api",
+              "FunctionName": "ssrserverless-angular-dev-api",
               "MemorySize": 192,
               "Timeout": 10,
               "Role": {
@@ -194,20 +195,20 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionIaZMArclcdaBOUWovKZfTxCmoqtIydAsh8SQU6WSvc": {
+          "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "439WAdkyEnhHltfJwHD3vaQwfUXOI7QHwlDOYzypjqg="
+              "CodeSha256": "Xpo0rHp08SXYjUHwKq8sgWCr3lyD0MHlVsiWrPhJWfg="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-dev-ssrserverless-angular",
+              "Name": "dev-ssrserverless-angular",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -231,51 +232,98 @@
               }
             }
           },
-          "ApiGatewayMethodProxyVarAny": {
+          "ApiGatewayMethodOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "ANY",
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
               "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodProxyVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceProxyVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "ApiLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "ApiLambdaPermissionApiGateway"
-            ]
+              }
+            }
           },
           "ApiGatewayMethodAny": {
             "Type": "AWS::ApiGateway::Method",
@@ -326,7 +374,53 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1699886066940": {
+          "ApiGatewayMethodProxyVarAny": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "ANY",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProxyVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ApiLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ApiLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1700070883285": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -335,8 +429,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodProxyVarAny",
-              "ApiGatewayMethodAny"
+              "ApiGatewayMethodOptions",
+              "ApiGatewayMethodProxyVarOptions",
+              "ApiGatewayMethodAny",
+              "ApiGatewayMethodProxyVarAny"
             ]
           },
           "ApiLambdaPermissionApiGateway": {
@@ -375,6 +471,211 @@
                 ]
               }
             }
+          },
+          "CustomApiGatewayBasePathMappingLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "/aws/lambda/",
+                    {
+                      "Ref": "CustomApiGatewayBasePathMappingFunction"
+                    }
+                  ]
+                ]
+              },
+              "RetentionInDays": 1
+            },
+            "DependsOn": []
+          },
+          "CustomApiGatewayBasePathMappingRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "Path": "/",
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": "lambda.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": "apigateway-permissions",
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "apigateway:*"
+                        ],
+                        "Resource": "arn:aws:apigateway:*:*:*"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "PolicyName": "logging-permission",
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogGroup",
+                          "logs:PutRetentionPolicy"
+                        ],
+                        "Resource": {
+                          "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:*:"
+                        }
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents",
+                          "logs:DescribeLogStreams",
+                          "logs:GetLogEvents"
+                        ],
+                        "Resource": {
+                          "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:*:log-stream:*"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "CustomApiGatewayBasePathMappingFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Runtime": "nodejs14.x",
+              "Timeout": 60,
+              "Handler": "index.handler",
+              "Role": {
+                "Fn::GetAtt": [
+                  "CustomApiGatewayBasePathMappingRole",
+                  "Arn"
+                ]
+              },
+              "Code": {
+                "ZipFile": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "'use strict';",
+                      "Object.defineProperty(exports, '__esModule', { value: true });",
+                      "var awsSdk = require('aws-sdk');",
+                      "var cfnResponse = require('cfn-response');",
+                      "function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }",
+                      "var awsSdk__default = /*#__PURE__*/_interopDefaultLegacy(awsSdk);",
+                      "var cfnResponse__default = /*#__PURE__*/_interopDefaultLegacy(cfnResponse);",
+                      "var handler = function(event, context) {",
+                      "Promise.resolve()",
+                      ".then(() => {",
+                      "const apiGateway = new awsSdk__default[\"default\"].APIGateway();",
+                      "const basePath = event.ResourceProperties.BasePath;",
+                      "const domainName = event.ResourceProperties.DomainName;",
+                      "const restApiId = event.ResourceProperties.RestApi;",
+                      "const stage = event.ResourceProperties.Stage;",
+                      "switch (event.RequestType) {",
+                      "case 'Create':",
+                      "case 'Update':",
+                      "return apiGateway.getBasePathMapping({",
+                      "basePath,",
+                      "domainName",
+                      "})",
+                      ".promise()",
+                      ".then(() => {",
+                      "return apiGateway.updateBasePathMapping({",
+                      "basePath,",
+                      "domainName,",
+                      "patchOperations: [{",
+                      "op: 'replace',",
+                      "path: '/restapiId',",
+                      "value: restApiId",
+                      "}, {",
+                      "op: 'replace',",
+                      "path: '/stage',",
+                      "value: stage",
+                      "}]",
+                      "})",
+                      ".promise()",
+                      ".then(() => 'updated')",
+                      "})",
+                      ".catch(e => {",
+                      "if (e.statusCode === 404 || e.code === 'NotFoundException') {",
+                      "return apiGateway.createBasePathMapping({",
+                      "basePath,",
+                      "domainName,",
+                      "restApiId,",
+                      "stage",
+                      "})",
+                      ".promise()",
+                      ".then(() => 'created');",
+                      "}",
+                      "throw e;",
+                      "});",
+                      "default:",
+                      "return Promise.resolve('no action matched')",
+                      "}",
+                      "})",
+                      ".then((msg) => {",
+                      "/* eslint-disable no-console */",
+                      "console.log('completed: ', msg);",
+                      "cfnResponse__default[\"default\"].send(event, context, cfnResponse__default[\"default\"].SUCCESS, {});",
+                      "})",
+                      ".catch(e => {",
+                      "/* eslint-disable no-console */",
+                      "console.log(e);",
+                      "cfnResponse__default[\"default\"].send(event, context, cfnResponse__default[\"default\"].FAILED, {});",
+                      "});",
+                      "};",
+                      "var customResource = {",
+                      "handler: handler",
+                      "};",
+                      "exports[\"default\"] = customResource;",
+                      "exports.handler = handler;"
+                    ]
+                  ]
+                }
+              }
+            },
+            "DependsOn": [
+              "CustomApiGatewayBasePathMappingRole"
+            ]
+          },
+          "CustomApiGatewayBasePathMappingResource": {
+            "Type": "Custom::ApiGatewayBasePathMapping",
+            "Properties": {
+              "DomainName": "corporate-dev.francoislongatte.be",
+              "BasePath": "(none)",
+              "Stage": "dev",
+              "RestApi": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ServiceToken": {
+                "Fn::GetAtt": [
+                  "CustomApiGatewayBasePathMappingFunction",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CustomApiGatewayBasePathMappingFunction",
+              "CustomApiGatewayBasePathMappingLogGroup",
+              "ApiGatewayRestApi",
+              "ApiGatewayDeployment1700070883285"
+            ]
           }
         },
         "Outputs": {
@@ -383,16 +684,16 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-dev-ssrserverless-angular-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-ssrserverless-angular-dev-ServerlessDeploymentBucketName"
             }
           },
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionIaZMArclcdaBOUWovKZfTxCmoqtIydAsh8SQU6WSvc"
+              "Ref": "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts"
             },
             "Export": {
-              "Name": "sls-dev-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
+              "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -418,7 +719,7 @@
               ]
             },
             "Export": {
-              "Name": "sls-dev-ssrserverless-angular-dev-ServiceEndpoint"
+              "Name": "sls-ssrserverless-angular-dev-ServiceEndpoint"
             }
           }
         }
@@ -508,6 +809,10 @@
       "vpc": {}
     },
     "custom": {
+      "domain": {
+        "name": "corporate-dev.francoislongatte.be",
+        "basePath": ""
+      },
       "apigwBinary": {
         "types": [
           "*/*"
@@ -515,7 +820,8 @@
       }
     },
     "plugins": [
-      "serverless-apigw-binary"
+      "serverless-apigw-binary",
+      "serverless-plugin-custom-domain"
     ],
     "pluginsData": {},
     "functions": {
@@ -523,25 +829,67 @@
         "handler": "lambda.handler",
         "events": [
           {
-            "http": "ANY {proxy+}"
+            "http": {
+              "path": "",
+              "method": "any",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "ANY"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
           },
           {
-            "http": "ANY /"
+            "http": {
+              "path": "{proxy+}",
+              "method": "any",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "ANY"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
           }
         ],
-        "name": "dev-ssrserverless-angular-dev-api",
+        "name": "ssrserverless-angular-dev-api",
         "package": {},
         "memory": 192,
         "timeout": 10,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionIaZMArclcdaBOUWovKZfTxCmoqtIydAsh8SQU6WSvc"
+        "versionLogicalId": "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
-      "service": "dev-ssrserverless-angular",
+      "service": "ssrserverless-angular",
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
       },
@@ -563,9 +911,9 @@
           "dist/**",
           "lambda.js"
         ],
-        "artifactsS3KeyDirname": "serverless/dev-ssrserverless-angular/dev/code-artifacts",
-        "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\dev-ssrserverless-angular.zip",
-        "artifactDirectoryName": "serverless/dev-ssrserverless-angular/dev/1699886084245-2023-11-13T14:34:44.245Z"
+        "artifactsS3KeyDirname": "serverless/ssrserverless-angular/dev/code-artifacts",
+        "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip",
+        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -576,10 +924,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\dev-ssrserverless-angular.zip"
+    "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/dev-ssrserverless-angular/dev/1699886084245-2023-11-13T14:34:44.245Z",
-    "artifact": "dev-ssrserverless-angular.zip"
+    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z",
+    "artifact": "ssrserverless-angular.zip"
   }
 }

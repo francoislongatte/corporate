@@ -56,7 +56,7 @@
 		"postcss": "^8.4.29",
 		"prettier": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.7",
-		"serverless-domain-manager": "^7.1.2",
+		"serverless-plugin-custom-domain": "^3.0.0",
 		"tailwindcss": "^3.3.3",
 		"typescript": "~5.2.2"
 	}
