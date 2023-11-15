@@ -1,3 +1,10 @@
+
+params:
+  # Values for the "prod" stage
+  default:
+    envName: ""
+  
+
 service: ${param:envName}-ssrserverless-angular
 
 plugins:
