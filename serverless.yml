@@ -1,4 +1,4 @@
-service: ${opt:envName}-ssrserverless-angular
+service: ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
@@ -9,6 +9,7 @@ provider:
   memorySize: 192
   timeout: 10
   region: eu-west-1
+  stackName: ${param:envName}-ssrserverless-angular
 
 package:
   exclude:
