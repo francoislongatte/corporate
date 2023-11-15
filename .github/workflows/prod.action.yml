@@ -12,8 +12,6 @@ jobs:
       contents: read
     name: deploy on prod
     runs-on: ubuntu-latest
-    env:
-      NAME: 'PROD'
     strategy:
       matrix:
         node-version: [18.x]

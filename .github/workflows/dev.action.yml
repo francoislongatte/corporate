@@ -12,8 +12,6 @@ jobs:
       contents: read
     name: deploy on dev
     runs-on: ubuntu-latest
-    env:
-      NAME: 'DEV'
     strategy:
       matrix:
         node-version: [18.x]
