@@ -6,7 +6,7 @@ plugins:
 
 custom:
   customDomain:
-    domainName: corporate.francoislongatte.be
+    domainName: corporate-dev.francoislongatte.be
     basePath: ""
     certificateName: francoislongatte
     createRoute53Record: true
