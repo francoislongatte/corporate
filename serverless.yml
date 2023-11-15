@@ -2,6 +2,14 @@ service: ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: corporate.francoislongatte.be
+    basePath: ""
+    certificateName: francoislongatte
+    createRoute53Record: true
 
 provider:
   name: aws
