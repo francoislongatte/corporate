@@ -91,12 +91,9 @@
 							"optimization": true
 						},
 						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"sourceMap": true,
-							"extractLicenses": false,
-							"vendorChunk": true,
-							"outputHashing": "media"
+							"outputHashing": "media",
+							"sourceMap": false,
+							"optimization": true
 						}
 					},
 					"defaultConfiguration": "production"
