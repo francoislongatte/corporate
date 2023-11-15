@@ -86,7 +86,7 @@
 					},
 					"configurations": {
 						"production": {
-							"outputHashing": "all"
+							"outputHashing": "media"
 						},
 						"development": {
 							"buildOptimizer": false,
@@ -94,7 +94,7 @@
 							"sourceMap": true,
 							"extractLicenses": false,
 							"vendorChunk": true,
-							"outputHashing": "all"
+							"outputHashing": "media"
 						}
 					},
 					"defaultConfiguration": "production"
