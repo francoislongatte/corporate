@@ -9,7 +9,9 @@
 		"test": "ng test",
 		"dev:ssr": "ng run angular-universal:serve-ssr",
 		"serve:ssr": "node dist/angular-universal/server/main.js",
-		"build:ssr": "ng build && ng run angular-universal:server:production",
+		"build:ssr:dev": "ng build && ng run angular-universal:server:production --base-href=dev",
+		"build:ssr:staging": "ng build && ng run angular-universal:server:production --base-href=staging",
+		"build:ssr:prod": "ng build && ng run angular-universal:server:production",
 		"prerender": "ng run angular-universal:prerender",
 		"deploy": "npm run build:ssr && serverless deploy --stage dev"
 	},
