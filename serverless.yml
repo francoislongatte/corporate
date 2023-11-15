@@ -1,11 +1,4 @@
-
-params:
-  # Values for the "prod" stage
-  default:
-    envName: ""
-  
-
-service: ${param:envName}-ssrserverless-angular
+service: ${opt:envName}-ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
