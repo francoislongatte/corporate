@@ -33,7 +33,7 @@ export function app(): express.Express {
 	// All regular routes use the Angular engine
 	server.get('*', (req, res, next) => {
 		const { protocol, originalUrl, baseUrl, headers } = req
-		console.log(baseUrl);
+
 		commonEngine
 			.render({
 				bootstrap,
@@ -69,4 +69,4 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
 	run()
 }
 
-export * from './src/main.server';
+export * from './src/main.server'
