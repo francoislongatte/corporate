@@ -4,13 +4,6 @@ plugins:
   - serverless-apigw-binary
   - serverless-domain-manager
 
-custom:
-  customDomain:
-    domainName: corporate-dev.francoislongatte.be
-    basePath: ""
-    certificateName: francoislongatte
-    createRoute53Record: true
-
 provider:
   name: aws
   runtime: nodejs18.x
@@ -34,6 +27,11 @@ package:
     - 'lambda.js'
 
 custom:
+  customDomain:
+    domainName: corporate-dev.francoislongatte.be
+    basePath: ''
+    certificateName: francoislongatte
+    createRoute53Record: true
   apigwBinary:
     types:
       - '*/*'
