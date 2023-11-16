@@ -28,7 +28,7 @@ package:
 
 custom:
   domain:
-    name: 'corporate-${param:envName}.francoislongatte.be'
+    name: '${param:envName}.cobuildr.agency'
     basePath: ''
   apigwBinary:
     types:
