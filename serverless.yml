@@ -27,9 +27,6 @@ package:
     - 'lambda.js'
 
 custom:
-  domain:
-    name: '${param:envName}.cobuildr.agency'
-    basePath: ''
   apigwBinary:
     types:
       - '*/*'
