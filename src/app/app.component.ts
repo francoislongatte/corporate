@@ -29,5 +29,8 @@ import { AfterComponent } from './page/index/after/after.component'
 	}
 })
 export class AppComponent {
-	title = 'angular-universal'
+	popup() {
+		;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
+		return false
+	}
 }
