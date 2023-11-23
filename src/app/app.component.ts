@@ -8,6 +8,7 @@ import { TimelineComponent } from './page/index/timeline/timeline.component'
 import { FaqComponent } from './page/index/faq/faq.component'
 import { CarouselComponent } from './page/index/carousel/carousel.component'
 import { AfterComponent } from './page/index/after/after.component'
+import { ScriptStoreService } from './core/service/scriptStore.service'
 
 @Component({
 	selector: 'main',
@@ -24,13 +25,15 @@ import { AfterComponent } from './page/index/after/after.component'
 		FaqComponent,
 		AfterComponent
 	],
+	providers: [ScriptStoreService],
 	host: {
 		class: 'antialiased block bg-[#FFFEFC] lg:mt-20 mt-8 lg:px-6 px-4'
 	}
 })
 export class AppComponent {
+	constructor(private script: ScriptStoreService) {}
 	popup() {
-		;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
+		this.script.openCalendly()
 		return false
 	}
 }
