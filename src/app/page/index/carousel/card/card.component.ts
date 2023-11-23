@@ -16,4 +16,5 @@ export class CardComponent {
 	@Input() count!: string
   @Input() width!: string
   @Input() height!: string
+  @Input() alt!: string
 }
