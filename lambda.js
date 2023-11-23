@@ -10,6 +10,7 @@ const binaryMimeTypes = [
 	'image/jpeg',
 	'image/png',
 	'image/gif',
+	'image/webp',
 	'text/comma-separated-values',
 	'text/css',
 	'text/html',
