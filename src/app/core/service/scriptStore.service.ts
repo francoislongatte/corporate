@@ -43,7 +43,7 @@ export class ScriptStoreService {
 			})
 		}
 		this.loadScript('calendly').then(() => {
-			(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
+			;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
 		})
 	}
 
@@ -54,9 +54,9 @@ export class ScriptStoreService {
 				resolve({ script: name, loaded: true })
 			} else {
 				let script = document.createElement('script')
-				script.type = 'text/javascript'
-				script.src = findScript!.src
-				script.defer = true
+				script.setAttribute('type', 'text/javascript')
+				script.setAttribute('src', findScript!.src)
+				script.setAttribute('defer', '')
 				script.onload = () => {
 					findScript!.loaded = true
 					resolve({ script: name, loaded: true })
