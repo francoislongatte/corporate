@@ -11,7 +11,7 @@
 		"serve:ssr": "node dist/angular-universal/server/main.js",
 		"build:ssr": "ng build --configuration production && ng run angular-universal:server:production",
 		"prerender": "ng run angular-universal:prerender",
-		"deploy": "npm run build:ssr && serverless deploy --stage dev"
+		"deploy": "npm run build:ssr && serverless deploy --param=envName=dev"
 	},
 	"private": true,
 	"dependencies": {

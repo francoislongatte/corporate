@@ -177,7 +177,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z/ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1700730679710-2023-11-23T09:11:19.710Z/ssrserverless-angular.zip"
               },
               "Handler": "lambda.handler",
               "Runtime": "nodejs18.x",
@@ -195,14 +195,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts": {
+          "ApiLambdaVersionBYpyF5yg5Ol7gufGr3qQgQa1fhXWW5Qz0jVjYmMiXo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "Xpo0rHp08SXYjUHwKq8sgWCr3lyD0MHlVsiWrPhJWfg="
+              "CodeSha256": "WvXx+GqN7LwACYw0Q8D6Sjcd3tJLMGl/t6qjp0zq2mA="
             }
           },
           "ApiGatewayRestApi": {
@@ -420,7 +420,7 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1700070883285": {
+          "ApiGatewayDeployment1700730655068": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -471,211 +471,6 @@
                 ]
               }
             }
-          },
-          "CustomApiGatewayBasePathMappingLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "/aws/lambda/",
-                    {
-                      "Ref": "CustomApiGatewayBasePathMappingFunction"
-                    }
-                  ]
-                ]
-              },
-              "RetentionInDays": 1
-            },
-            "DependsOn": []
-          },
-          "CustomApiGatewayBasePathMappingRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-              "Path": "/",
-              "AssumeRolePolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Principal": {
-                      "Service": "lambda.amazonaws.com"
-                    },
-                    "Action": "sts:AssumeRole"
-                  }
-                ]
-              },
-              "Policies": [
-                {
-                  "PolicyName": "apigateway-permissions",
-                  "PolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "apigateway:*"
-                        ],
-                        "Resource": "arn:aws:apigateway:*:*:*"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "PolicyName": "logging-permission",
-                  "PolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:CreateLogGroup",
-                          "logs:PutRetentionPolicy"
-                        ],
-                        "Resource": {
-                          "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:*:"
-                        }
-                      },
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:CreateLogStream",
-                          "logs:PutLogEvents",
-                          "logs:DescribeLogStreams",
-                          "logs:GetLogEvents"
-                        ],
-                        "Resource": {
-                          "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:*:log-stream:*"
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          "CustomApiGatewayBasePathMappingFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Runtime": "nodejs14.x",
-              "Timeout": 60,
-              "Handler": "index.handler",
-              "Role": {
-                "Fn::GetAtt": [
-                  "CustomApiGatewayBasePathMappingRole",
-                  "Arn"
-                ]
-              },
-              "Code": {
-                "ZipFile": {
-                  "Fn::Join": [
-                    "\n",
-                    [
-                      "'use strict';",
-                      "Object.defineProperty(exports, '__esModule', { value: true });",
-                      "var awsSdk = require('aws-sdk');",
-                      "var cfnResponse = require('cfn-response');",
-                      "function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }",
-                      "var awsSdk__default = /*#__PURE__*/_interopDefaultLegacy(awsSdk);",
-                      "var cfnResponse__default = /*#__PURE__*/_interopDefaultLegacy(cfnResponse);",
-                      "var handler = function(event, context) {",
-                      "Promise.resolve()",
-                      ".then(() => {",
-                      "const apiGateway = new awsSdk__default[\"default\"].APIGateway();",
-                      "const basePath = event.ResourceProperties.BasePath;",
-                      "const domainName = event.ResourceProperties.DomainName;",
-                      "const restApiId = event.ResourceProperties.RestApi;",
-                      "const stage = event.ResourceProperties.Stage;",
-                      "switch (event.RequestType) {",
-                      "case 'Create':",
-                      "case 'Update':",
-                      "return apiGateway.getBasePathMapping({",
-                      "basePath,",
-                      "domainName",
-                      "})",
-                      ".promise()",
-                      ".then(() => {",
-                      "return apiGateway.updateBasePathMapping({",
-                      "basePath,",
-                      "domainName,",
-                      "patchOperations: [{",
-                      "op: 'replace',",
-                      "path: '/restapiId',",
-                      "value: restApiId",
-                      "}, {",
-                      "op: 'replace',",
-                      "path: '/stage',",
-                      "value: stage",
-                      "}]",
-                      "})",
-                      ".promise()",
-                      ".then(() => 'updated')",
-                      "})",
-                      ".catch(e => {",
-                      "if (e.statusCode === 404 || e.code === 'NotFoundException') {",
-                      "return apiGateway.createBasePathMapping({",
-                      "basePath,",
-                      "domainName,",
-                      "restApiId,",
-                      "stage",
-                      "})",
-                      ".promise()",
-                      ".then(() => 'created');",
-                      "}",
-                      "throw e;",
-                      "});",
-                      "default:",
-                      "return Promise.resolve('no action matched')",
-                      "}",
-                      "})",
-                      ".then((msg) => {",
-                      "/* eslint-disable no-console */",
-                      "console.log('completed: ', msg);",
-                      "cfnResponse__default[\"default\"].send(event, context, cfnResponse__default[\"default\"].SUCCESS, {});",
-                      "})",
-                      ".catch(e => {",
-                      "/* eslint-disable no-console */",
-                      "console.log(e);",
-                      "cfnResponse__default[\"default\"].send(event, context, cfnResponse__default[\"default\"].FAILED, {});",
-                      "});",
-                      "};",
-                      "var customResource = {",
-                      "handler: handler",
-                      "};",
-                      "exports[\"default\"] = customResource;",
-                      "exports.handler = handler;"
-                    ]
-                  ]
-                }
-              }
-            },
-            "DependsOn": [
-              "CustomApiGatewayBasePathMappingRole"
-            ]
-          },
-          "CustomApiGatewayBasePathMappingResource": {
-            "Type": "Custom::ApiGatewayBasePathMapping",
-            "Properties": {
-              "DomainName": "corporate-dev.francoislongatte.be",
-              "BasePath": "(none)",
-              "Stage": "dev",
-              "RestApi": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ServiceToken": {
-                "Fn::GetAtt": [
-                  "CustomApiGatewayBasePathMappingFunction",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "CustomApiGatewayBasePathMappingFunction",
-              "CustomApiGatewayBasePathMappingLogGroup",
-              "ApiGatewayRestApi",
-              "ApiGatewayDeployment1700070883285"
-            ]
           }
         },
         "Outputs": {
@@ -690,7 +485,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts"
+              "Ref": "ApiLambdaVersionBYpyF5yg5Ol7gufGr3qQgQa1fhXWW5Qz0jVjYmMiXo"
             },
             "Export": {
               "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
@@ -809,10 +604,6 @@
       "vpc": {}
     },
     "custom": {
-      "domain": {
-        "name": "corporate-dev.francoislongatte.be",
-        "basePath": ""
-      },
       "apigwBinary": {
         "types": [
           "*/*"
@@ -883,7 +674,7 @@
         "timeout": 10,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersion5TRpJ5YaVj0Dfp3Wr0WTzG7LtGkLPYxjEZYgRuts"
+        "versionLogicalId": "ApiLambdaVersionBYpyF5yg5Ol7gufGr3qQgQa1fhXWW5Qz0jVjYmMiXo"
       }
     },
     "configValidationMode": "warn",
@@ -913,7 +704,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/ssrserverless-angular/dev/code-artifacts",
         "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip",
-        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z"
+        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700730679710-2023-11-23T09:11:19.710Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -927,7 +718,7 @@
     "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700070899494-2023-11-15T17:54:59.494Z",
+    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1700730679710-2023-11-23T09:11:19.710Z",
     "artifact": "ssrserverless-angular.zip"
   }
 }
