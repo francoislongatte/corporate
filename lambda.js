@@ -1,6 +1,7 @@
 const awsServerlessExpress = require('aws-serverless-express')
 const server = require('./dist/angular-universal/server/main')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const compression = require('compression')
 
 const binaryMimeTypes = [
 	'application/javascript',
@@ -24,5 +25,6 @@ const binaryMimeTypes = [
 
 const app = server.app()
 app.use(awsServerlessExpressMiddleware.eventContext())
+app.use(compression())
 const serverProxy = awsServerlessExpress.createServer(app, null, binaryMimeTypes)
 module.exports.handler = (event, context) => awsServerlessExpress.proxy(serverProxy, event, context)
