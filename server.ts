@@ -6,10 +6,12 @@ import * as express from 'express'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import bootstrap from './src/main.server'
+import * as compression from 'compression'
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
 	const server = express()
+	server.use
 	const distFolder = join(process.cwd(), 'dist/angular-universal/browser')
 	const indexHtml = existsSync(join(distFolder, 'index.original.html'))
 		? join(distFolder, 'index.original.html')
@@ -45,6 +47,8 @@ export function app(): express.Express {
 			.then((html) => res.send(html))
 			.catch((err) => next(err))
 	})
+
+	server.use(compression())
 
 	return server
 }
