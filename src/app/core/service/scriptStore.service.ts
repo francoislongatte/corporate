@@ -41,25 +41,25 @@ export class ScriptStoreService {
 				loaded,
 				src
 			})
-			this.loadScript('calendly').then(() => {
-				;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
-			})
-		} else {
-			;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
 		}
+		this.loadScript('calendly').then(() => {
+			(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
+		})
 	}
 
 	private loadScript(name: string) {
 		return new Promise((resolve, reject) => {
 			const findScript = this.scripts.find((script) => script.name == name)
-			if (!findScript?.loaded) {
+			if (findScript?.loaded) {
+				resolve({ script: name, loaded: true })
+			} else {
 				let script = document.createElement('script')
 				script.type = 'text/javascript'
 				script.src = findScript!.src
 				script.defer = true
 				script.onload = () => {
 					findScript!.loaded = true
-					resolve({ script: name, loaded: true, status: 'Loaded' })
+					resolve({ script: name, loaded: true })
 				}
 				document.getElementsByTagName('body')[0].appendChild(script)
 			}
