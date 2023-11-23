@@ -52,9 +52,7 @@ export class ScriptStoreService {
 	private loadScript(name: string) {
 		return new Promise((resolve, reject) => {
 			const findScript = this.scripts.find((script) => script.name == name)
-			//resolve if already loaded
 			if (!findScript?.loaded) {
-				//load script
 				let script = document.createElement('script')
 				script.type = 'text/javascript'
 				script.src = findScript!.src
