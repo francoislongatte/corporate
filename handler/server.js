@@ -1,5 +1,5 @@
 const awsServerlessExpress = require('aws-serverless-express')
-const server = require('./dist/angular-universal/server/main')
+const server = require('../dist/angular-universal/server/main')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 
 const binaryMimeTypes = [

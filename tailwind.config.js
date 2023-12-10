@@ -16,18 +16,15 @@ module.exports = {
 		extend: {
 			keyframes: {
 				scroll: {
-					'0%': { transform: 'translateX(0)' },
-					'100%': { transform: 'translateX(calc(-50% - 0.75rem))' }
+					'0%': { transform: 'translateX(calc( -100% - 24px ))' },
+					'100%': { transform: 'translateX(calc( -400% - 24px * 4 ))' }
 				}
 			},
 			animation: {
-				'spin-low': 'scroll 60s linear  infinite'
+				carousel: 'scroll 75s linear infinite'
 			},
 			textUnderlineOffset: {
 				16: '16px'
-			},
-			height: {
-				card: '500px'
 			},
 			padding: {
 				'1/2': '50%',

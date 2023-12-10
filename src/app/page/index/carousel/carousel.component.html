@@ -1,35 +1,19 @@
-<div class="container px-4 sm:px-0">
-	<div class="inline-flex items-center gap-2 text-xl font-semibold leading-loose">
-		Take a look at what we do
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="1.5"
-			stroke="currentColor"
-			class="-mt-2 h-3 w-3"
+<div class="media-container">
+	<div class="media-scroller">
+		<!--   Group 1 -->
+		<div
+			class="media-group animate-carousel container"
+			style="
+				--background-carousel-before: url('assets/img/carousel/optim/03.webp');
+				--background-carousel-after: url('assets/img/carousel/optim/02.webp');
+			"
+			id="group-1"
 		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
-			/>
-		</svg>
-	</div>
-</div>
-
-<div
-	class="mt-10 flex w-[calc(100%*8)] animate-spin-low sm:w-[calc(100%*6)] md:mt-16 md:w-[calc(100%*4)] lg:w-[calc(100%*2)]"
->
-	<!-- Grid -->
-	<div class="flex flex-1 gap-6">
-		<card count="1" alt="01" link=".\assets\img\carousel\optim\01.webp" width="450" height="337"></card>
-		<card count="2" alt="02" link=".\assets\img\carousel\optim\02.webp" width="450" height="337"></card>
-		<card count="3" alt="03" link=".\assets\img\carousel\optim\03.webp" width="450" height="337"></card>
-		<card count="4" alt="04" link=".\assets\img\carousel\optim\04.webp" width="450" height="281"></card>
-		<card count="1" alt="01" link=".\assets\img\carousel\optim\01.webp" width="450" height="337"></card>
-		<card count="2" alt="02" link=".\assets\img\carousel\optim\02.webp" width="450" height="337"></card>
-		<card count="3" alt="03" link=".\assets\img\carousel\optim\03.webp" width="450" height="337"></card>
-		<card count="4" alt="04" link=".\assets\img\carousel\optim\04.webp" width="450" height="281"></card>
+			@for (item of links; track item) {
+			<div class="media-element overflow-hidden rounded-xl">
+				<img priority [ngSrc]="item" width="450" height="337" class="h-full w-full object-cover" />
+			</div>
+			}
+		</div>
 	</div>
 </div>
