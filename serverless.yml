@@ -32,23 +32,24 @@ custom:
       - '*/*'
 
 resources:
-  ClientTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ClientTable
-      AttributeDefinitions:
-        - AttributeName: customerId
-          AttributeType: S
-        - AttributeName: email
-          AttributeType: S
-        - AttributeName: createdAt
-          AttributeType: N
-      KeySchema:
-        - AttributeName: customerId
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+  Resources:
+    ClientTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ClientTable
+        AttributeDefinitions:
+          - AttributeName: customerId
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+          - AttributeName: createdAt
+            AttributeType: N
+        KeySchema:
+          - AttributeName: customerId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
 
 functions:
   api:
