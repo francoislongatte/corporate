@@ -77,6 +77,12 @@
         "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-api"
       }
     },
+    "SaveClientLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-saveClient"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -162,9 +168,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1700730679710-2023-11-23T09:11:19.710Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z/ssrserverless-angular.zip"
         },
-        "Handler": "lambda.handler",
+        "Handler": "handler/server.handler",
         "Runtime": "nodejs18.x",
         "FunctionName": "ssrserverless-angular-dev-api",
         "MemorySize": 192,
@@ -180,14 +186,49 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionBYpyF5yg5Ol7gufGr3qQgQa1fhXWW5Qz0jVjYmMiXo": {
+    "SaveClientLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z/ssrserverless-angular.zip"
+        },
+        "Handler": "handler/client.saveClient",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "ssrserverless-angular-dev-saveClient",
+        "MemorySize": 192,
+        "Timeout": 10,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "SaveClientLogGroup"
+      ]
+    },
+    "ApiLambdaVersionK7arBKnlCtUOYMM40xlljTt9WYMsEZLF5vvUIPYcMFo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "WvXx+GqN7LwACYw0Q8D6Sjcd3tJLMGl/t6qjp0zq2mA="
+        "CodeSha256": "QA2dR8PAIbgr5tVinvcLVh2l1QSPwNS04uQYgaE4yIg="
+      }
+    },
+    "SaveClientLambdaVersiongDOGpHSCcHSO3UccN6LRFNFyE0Gly5B3r97ySKU0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "SaveClientLambdaFunction"
+        },
+        "CodeSha256": "QA2dR8PAIbgr5tVinvcLVh2l1QSPwNS04uQYgaE4yIg="
       }
     },
     "ApiGatewayRestApi": {
@@ -212,6 +253,21 @@
           ]
         },
         "PathPart": "{proxy+}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceSaveclient": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "saveClient",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -405,7 +461,53 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1700730655068": {
+    "ApiGatewayMethodSaveclientPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSaveclient"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "SaveClientLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "SaveClientLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayDeployment1702224418715": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -417,7 +519,8 @@
         "ApiGatewayMethodOptions",
         "ApiGatewayMethodProxyVarOptions",
         "ApiGatewayMethodAny",
-        "ApiGatewayMethodProxyVarAny"
+        "ApiGatewayMethodProxyVarAny",
+        "ApiGatewayMethodSaveclientPost"
       ]
     },
     "ApiLambdaPermissionApiGateway": {
@@ -456,6 +559,91 @@
           ]
         }
       }
+    },
+    "SaveClientLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "SaveClientLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "ClientTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "ClientTable",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "email",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "createdAt",
+            "AttributeType": "N"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "email",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "createdAt",
+            "KeyType": "RANGE"
+          }
+        ],
+        "LocalSecondaryIndexes": [
+          {
+            "IndexName": "createdDate",
+            "KeySchema": [
+              {
+                "AttributeName": "email",
+                "KeyType": "HASH"
+              },
+              {
+                "AttributeName": "createdAt",
+                "KeyType": "RANGE"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        }
+      }
     }
   },
   "Outputs": {
@@ -470,10 +658,19 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionBYpyF5yg5Ol7gufGr3qQgQa1fhXWW5Qz0jVjYmMiXo"
+        "Ref": "ApiLambdaVersionK7arBKnlCtUOYMM40xlljTt9WYMsEZLF5vvUIPYcMFo"
       },
       "Export": {
         "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
+      }
+    },
+    "SaveClientLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "SaveClientLambdaVersiongDOGpHSCcHSO3UccN6LRFNFyE0Gly5B3r97ySKU0"
+      },
+      "Export": {
+        "Name": "sls-ssrserverless-angular-dev-SaveClientLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

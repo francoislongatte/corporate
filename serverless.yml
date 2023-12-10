@@ -38,15 +38,24 @@ resources:
       Properties:
         TableName: ClientTable
         AttributeDefinitions:
-          - AttributeName: customerId
-            AttributeType: S
           - AttributeName: email
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: N
         KeySchema:
-          - AttributeName: customerId
+          - AttributeName: email
             KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
+        LocalSecondaryIndexes:
+          - IndexName: createdDate
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+              - AttributeName: createdAt
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
