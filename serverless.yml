@@ -74,6 +74,8 @@ resources:
             KeySchema:
               - AttributeName: email
                 KeyType: HASH
+              - AttributeName: customerId
+                KeyType: RANGE
             Projection:
               ProjectionType: ALL
         ProvisionedThroughput:
