@@ -65,7 +65,7 @@ export class ScriptStoreService {
 			if (findScript?.loaded) {
 				resolve({ script: name, loaded: true })
 			} else {
-				let script = document.createElement('script')
+				let script = this.document.createElement('script')
 				script.setAttribute('type', 'text/javascript')
 				script.setAttribute('src', findScript!.src)
 				script.setAttribute('defer', '')
@@ -73,7 +73,7 @@ export class ScriptStoreService {
 					findScript!.loaded = true
 					resolve({ script: name, loaded: true })
 				}
-				document.getElementsByTagName('body')[0].appendChild(script)
+				this.document.getElementsByTagName('body')[0].appendChild(script)
 			}
 		})
 	}
