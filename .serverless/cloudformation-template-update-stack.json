@@ -168,7 +168,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1702285834224-2023-12-11T09:10:34.224Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1702291766836-2023-12-11T10:49:26.836Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/server.handler",
         "Runtime": "nodejs18.x",
@@ -193,7 +193,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1702285834224-2023-12-11T09:10:34.224Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1702291766836-2023-12-11T10:49:26.836Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/client.saveClient",
         "Runtime": "nodejs18.x",
@@ -507,7 +507,7 @@
         "SaveClientLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1702285818780": {
+    "ApiGatewayDeployment1702291750864": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -631,44 +631,28 @@
           {
             "AttributeName": "email",
             "AttributeType": "S"
-          },
-          {
-            "AttributeName": "createdAt",
-            "AttributeType": "N"
           }
         ],
         "KeySchema": [
           {
             "AttributeName": "customerId",
             "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "email",
+            "KeyType": "RANGE"
           }
         ],
         "LocalSecondaryIndexes": [
           {
-            "IndexName": "createdDateIndex",
-            "KeySchema": [
-              {
-                "AttributeName": "customerId",
-                "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "createdAt",
-                "KeyType": "RANGE"
-              }
-            ],
-            "Projection": {
-              "ProjectionType": "ALL"
-            }
-          },
-          {
             "IndexName": "emailIndex",
             "KeySchema": [
               {
-                "AttributeName": "email",
+                "AttributeName": "customerId",
                 "KeyType": "HASH"
               },
               {
-                "AttributeName": "customerId",
+                "AttributeName": "email",
                 "KeyType": "RANGE"
               }
             ],

@@ -56,25 +56,17 @@ resources:
             AttributeType: S
           - AttributeName: email
             AttributeType: S
-          - AttributeName: createdAt
-            AttributeType: N
         KeySchema:
           - AttributeName: customerId
             KeyType: HASH
+          - AttributeName: email
+            KeyType: RANGE
         LocalSecondaryIndexes:
-          - IndexName: createdDateIndex
-            KeySchema:
-              - AttributeName: customerId
-                KeyType: HASH
-              - AttributeName: createdAt
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
           - IndexName: emailIndex
             KeySchema:
-              - AttributeName: email
-                KeyType: HASH
               - AttributeName: customerId
+                KeyType: HASH
+              - AttributeName: email
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL

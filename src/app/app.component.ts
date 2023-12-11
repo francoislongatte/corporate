@@ -9,6 +9,9 @@ import { FaqComponent } from './page/index/faq/faq.component'
 import { CarouselComponent } from './page/index/carousel/carousel.component'
 import { AfterComponent } from './page/index/after/after.component'
 import { ScriptStoreService } from './core/service/scriptStore.service'
+import { ReactiveFormsModule } from '@angular/forms'
+import { FormControl } from '@angular/forms'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
 	selector: 'main',
@@ -23,7 +26,8 @@ import { ScriptStoreService } from './core/service/scriptStore.service'
 		TimelineComponent,
 		CapabilitiesComponent,
 		FaqComponent,
-		AfterComponent
+		AfterComponent,
+		ReactiveFormsModule
 	],
 	providers: [ScriptStoreService],
 	host: {
@@ -31,9 +35,22 @@ import { ScriptStoreService } from './core/service/scriptStore.service'
 	}
 })
 export class AppComponent {
-	constructor(private script: ScriptStoreService) {}
+	email = new FormControl('')
+	constructor(
+		private script: ScriptStoreService,
+		private httpCLient: HttpClient
+	) {}
 	popup() {
 		this.script.openCalendly()
 		return false
+	}
+
+	saveEmail() {
+		alert('test')
+		this.httpCLient
+			.post('saveClient', {
+				email: this.email.value
+			})
+			.subscribe()
 	}
 }
