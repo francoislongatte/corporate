@@ -40,7 +40,7 @@ module.exports.saveClient = async (event) => {
 		const requestBody = JSON.parse(event.body)
 
 		const params = {
-			tableName: 'ClientTable',
+			tableName: 'CustomerTable',
 			item: {
 				email: requestBody.email,
 				createdAt: Date.now()

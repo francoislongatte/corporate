@@ -50,7 +50,7 @@ resources:
     ClientTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ClientTable
+        TableName: CustomerTable
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
