@@ -62,7 +62,7 @@ resources:
           - AttributeName: customerId
             KeyType: HASH
         LocalSecondaryIndexes:
-          - IndexName: createdDate
+          - IndexName: createdDateIndex
             KeySchema:
               - AttributeName: customerId
                 KeyType: HASH

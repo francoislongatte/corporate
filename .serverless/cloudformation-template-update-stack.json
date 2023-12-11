@@ -168,7 +168,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1702285626098-2023-12-11T09:07:06.098Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/server.handler",
         "Runtime": "nodejs18.x",
@@ -193,7 +193,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1702285626098-2023-12-11T09:07:06.098Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/client.saveClient",
         "Runtime": "nodejs18.x",
@@ -507,7 +507,7 @@
         "SaveClientLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1702282540267": {
+    "ApiGatewayDeployment1702285608759": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -645,7 +645,7 @@
         ],
         "LocalSecondaryIndexes": [
           {
-            "IndexName": "createdDate",
+            "IndexName": "createdDateIndex",
             "KeySchema": [
               {
                 "AttributeName": "customerId",
