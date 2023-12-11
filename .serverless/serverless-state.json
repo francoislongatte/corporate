@@ -183,7 +183,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z/ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z/ssrserverless-angular.zip"
               },
               "Handler": "handler/server.handler",
               "Runtime": "nodejs18.x",
@@ -208,7 +208,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z/ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z/ssrserverless-angular.zip"
               },
               "Handler": "handler/client.saveClient",
               "Runtime": "nodejs18.x",
@@ -522,7 +522,7 @@
               "SaveClientLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1702224418715": {
+          "ApiGatewayDeployment1702282540267": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -612,11 +612,37 @@
               }
             }
           },
-          "ClientTable": {
+          "SequenceTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "TableName": "ClientTable",
+              "TableName": "SequenceClientTable",
               "AttributeDefinitions": [
+                {
+                  "AttributeName": "sequenceClientId",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "sequenceClientId",
+                  "KeyType": "HASH"
+                }
+              ],
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+              }
+            }
+          },
+          "CustomerTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "CustomerTable",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "customerId",
+                  "AttributeType": "S"
+                },
                 {
                   "AttributeName": "email",
                   "AttributeType": "S"
@@ -628,12 +654,8 @@
               ],
               "KeySchema": [
                 {
-                  "AttributeName": "email",
+                  "AttributeName": "customerId",
                   "KeyType": "HASH"
-                },
-                {
-                  "AttributeName": "createdAt",
-                  "KeyType": "RANGE"
                 }
               ],
               "LocalSecondaryIndexes": [
@@ -641,11 +663,27 @@
                   "IndexName": "createdDate",
                   "KeySchema": [
                     {
-                      "AttributeName": "email",
+                      "AttributeName": "customerId",
                       "KeyType": "HASH"
                     },
                     {
                       "AttributeName": "createdAt",
+                      "KeyType": "RANGE"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                },
+                {
+                  "IndexName": "emailIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "email",
+                      "KeyType": "HASH"
+                    },
+                    {
+                      "AttributeName": "customerId",
                       "KeyType": "RANGE"
                     }
                   ],
@@ -895,11 +933,37 @@
     },
     "resources": {
       "Resources": {
-        "ClientTable": {
+        "SequenceTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "ClientTable",
+            "TableName": "SequenceClientTable",
             "AttributeDefinitions": [
+              {
+                "AttributeName": "sequenceClientId",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "sequenceClientId",
+                "KeyType": "HASH"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 5,
+              "WriteCapacityUnits": 5
+            }
+          }
+        },
+        "CustomerTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "CustomerTable",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "customerId",
+                "AttributeType": "S"
+              },
               {
                 "AttributeName": "email",
                 "AttributeType": "S"
@@ -911,12 +975,8 @@
             ],
             "KeySchema": [
               {
-                "AttributeName": "email",
+                "AttributeName": "customerId",
                 "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "createdAt",
-                "KeyType": "RANGE"
               }
             ],
             "LocalSecondaryIndexes": [
@@ -924,11 +984,27 @@
                 "IndexName": "createdDate",
                 "KeySchema": [
                   {
-                    "AttributeName": "email",
+                    "AttributeName": "customerId",
                     "KeyType": "HASH"
                   },
                   {
                     "AttributeName": "createdAt",
+                    "KeyType": "RANGE"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              },
+              {
+                "IndexName": "emailIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "email",
+                    "KeyType": "HASH"
+                  },
+                  {
+                    "AttributeName": "customerId",
                     "KeyType": "RANGE"
                   }
                 ],
@@ -973,7 +1049,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/ssrserverless-angular/dev/code-artifacts",
         "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip",
-        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z"
+        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -990,7 +1066,7 @@
     "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702224434067-2023-12-10T16:07:14.067Z",
+    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702282555304-2023-12-11T08:15:55.304Z",
     "artifact": "ssrserverless-angular.zip"
   }
 }

@@ -47,24 +47,24 @@ resources:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
 
-    ClientTable:
+    CustomerTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: CustomerTable
         AttributeDefinitions:
+          - AttributeName: customerId
+            AttributeType: S
           - AttributeName: email
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: N
         KeySchema:
-          - AttributeName: email
+          - AttributeName: customerId
             KeyType: HASH
-          - AttributeName: createdAt
-            KeyType: RANGE
         LocalSecondaryIndexes:
           - IndexName: createdDate
             KeySchema:
-              - AttributeName: email
+              - AttributeName: customerId
                 KeyType: HASH
               - AttributeName: createdAt
                 KeyType: RANGE
