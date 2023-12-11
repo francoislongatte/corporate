@@ -33,6 +33,20 @@ custom:
 
 resources:
   Resources:
+    SequenceTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: SequenceClientTable
+        AttributeDefinitions:
+          - AttributeName: sequenceClientId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: sequenceClientId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
     ClientTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -54,6 +68,12 @@ resources:
                 KeyType: HASH
               - AttributeName: createdAt
                 KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          - IndexName: emailIndex
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
             Projection:
               ProjectionType: ALL
         ProvisionedThroughput:
