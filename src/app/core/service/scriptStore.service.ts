@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
+import { DOCUMENT } from '@angular/common'
 
 interface Scripts {
 	name: string
@@ -15,12 +16,10 @@ export class ScriptStoreService {
 			{ name: 'googleAnalytics', src: 'https://www.googletagmanager.com/gtag/js?id=G-9CFF4D6N19' },
 			{ name: 'googleAnalyticsScript', src: '../../assets/scripts/googleAnalytics.js' }
 		],
-		click: [
-			{ name: 'calendly', src: 'https://assets.calendly.com/assets/external/widget.js' }
-		]
+		click: [{ name: 'calendly', src: 'https://assets.calendly.com/assets/external/widget.js' }]
 	}
 
-	constructor() {
+	constructor(@Inject(DOCUMENT) private document: Document) {
 		this.scriptStore['init'].forEach((script) => {
 			this.scripts.push({
 				name: script.name,
