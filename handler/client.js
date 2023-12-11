@@ -3,6 +3,12 @@
 const AWS = require('aws-sdk')
 const dynamoDB = new AWS.DynamoDB.DocumentClient()
 
+async function isValidEmail(email) {
+	// Expression régulière pour valider le format d'un e-mail
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+	return emailRegex.test(email)
+}
+
 async function getNextCustomerId() {
 	const sequenceTableName = 'SequenceClientTable'
 	const sequenceKeyName = 'sequenceClientId'
@@ -39,6 +45,10 @@ module.exports.saveClient = async (event) => {
 				email: requestBody.email,
 				createdAt: Date.now()
 			}
+		}
+
+		if (!(await isValidEmail(params.item.email))) {
+			throw new Error("L'e-mail fourni n'est pas valide.")
 		}
 
 		// Vérifier si l'email existe déjà dans la table
