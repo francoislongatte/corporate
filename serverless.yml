@@ -92,3 +92,12 @@ functions:
       - http:
           path: /saveClient
           method: post
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+          - dynamodb:GetItem
+        Resource:
+          Fn::GetAtt:
+            - CustomerTable
+            - Arn
