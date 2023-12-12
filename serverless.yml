@@ -87,7 +87,7 @@ functions:
           method: ANY
           cors: true
   saveClient:
-    handler: handler/client.saveClient
+    handler: handler/saveClient.handler
     events:
       - http:
           path: /saveClient

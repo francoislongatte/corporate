@@ -35,7 +35,7 @@ async function getNextCustomerId() {
 	return nextCustomerId
 }
 
-module.exports.saveClient = async (event) => {
+module.exports.handler = async (event) => {
 	try {
 		const requestBody = JSON.parse(event.body)
 
