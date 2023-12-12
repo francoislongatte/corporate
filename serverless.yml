@@ -24,7 +24,7 @@ package:
     - 'node_modules/mime-db/**'
     - 'node_modules/@vendia/**'
     - 'dist/**'
-    - 'lambda.js'
+    - 'handler/*'
 
 custom:
   apigwBinary:
@@ -86,23 +86,9 @@ functions:
           path: /{proxy+}
           method: ANY
           cors: true
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - execute-api:Invoke
-        Resource: '*'
   saveClient:
     handler: handler/saveClient.handler
     events:
       - http:
           path: /saveClient
           method: post
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - dynamodb:PutItem
-          - dynamodb:GetItem
-        Resource:
-          Fn::GetAtt:
-            - CustomerTable
-            - Arn
