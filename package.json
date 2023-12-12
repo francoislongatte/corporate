@@ -33,8 +33,6 @@
 		"express": "^4.15.2",
 		"preline": "^1.9.0",
 		"rxjs": "~7.8.0",
-		"serverless": "^3.34.0",
-		"serverless-apigw-binary": "^0.4.4",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.14.2"
 	},
@@ -58,6 +56,9 @@
 		"postcss": "^8.4.29",
 		"prettier": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.7",
+		"serverless": "^3.34.0",
+		"serverless-api-compression": "^1.0.1",
+		"serverless-apigw-binary": "^0.4.4",
 		"serverless-plugin-custom-domain": "^3.0.0",
 		"tailwindcss": "^3.3.3",
 		"typescript": "~5.2.2"

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Inject, PLATFORM_ID } from '@angular/core'
 import { NavbarComponent } from './core/navbar/navbar.component'
 import { CapabilitiesComponent } from './page/index/capabilities/capabilities.component'
 import { HeaderComponent } from './page/index/header/header.component'
@@ -12,6 +12,7 @@ import { ScriptStoreService } from './core/service/scriptStore.service'
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
+import { isPlatformBrowser } from '@angular/common'
 
 @Component({
 	selector: 'main',
@@ -38,19 +39,24 @@ export class AppComponent {
 	email = new FormControl('')
 	constructor(
 		private script: ScriptStoreService,
-		private httpCLient: HttpClient
+		private httpCLient: HttpClient,
+		@Inject(PLATFORM_ID) private readonly _platformId: Object
 	) {}
 	popup() {
-		this.script.openCalendly()
-		return false
+		if (isPlatformBrowser(this._platformId)) {
+			this.script.openCalendly()
+			return false
+		}
 	}
 
 	saveEmail() {
-		alert('test')
-		this.httpCLient
-			.post('saveClient', {
-				email: this.email.value
-			})
-			.subscribe()
+		if (isPlatformBrowser(this._platformId)) {
+			alert('test')
+			this.httpCLient
+				.post('saveClient', {
+					email: this.email.value
+				})
+				.subscribe()
+		}
 	}
 }

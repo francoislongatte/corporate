@@ -2,6 +2,7 @@ service: ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
+  - serverless-api-compression
   - serverless-plugin-custom-domain
 
 provider:
@@ -11,6 +12,22 @@ provider:
   timeout: 10
   region: eu-west-1
   stackName: ${param:envName}-ssrserverless-angular
+  tracing:
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        Fn::GetAtt:
+          - CustomerTable
+          - Arn
 
 package:
   exclude:
@@ -24,9 +41,10 @@ package:
     - 'node_modules/mime-db/**'
     - 'node_modules/@vendia/**'
     - 'dist/**'
-    - 'handler/*'
+    - 'handler/**'
 
 custom:
+  contentCompression: 1024
   apigwBinary:
     types:
       - '*/*'
@@ -81,11 +99,9 @@ functions:
       - http:
           path: /
           method: ANY
-          cors: true
       - http:
           path: /{proxy+}
           method: ANY
-          cors: true
   saveClient:
     handler: handler/saveClient.handler
     events:
