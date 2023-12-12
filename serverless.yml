@@ -86,6 +86,11 @@ functions:
           path: /{proxy+}
           method: ANY
           cors: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - execute-api:Invoke
+        Resource: '*'
   saveClient:
     handler: handler/saveClient.handler
     events:
