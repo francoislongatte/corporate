@@ -42,10 +42,10 @@ export class AppComponent {
 		private httpCLient: HttpClient,
 		@Inject(PLATFORM_ID) private readonly _platformId: Object
 	) {}
+
 	popup() {
 		if (isPlatformBrowser(this._platformId)) {
 			this.script.openCalendly()
-			return false
 		}
 	}
 
