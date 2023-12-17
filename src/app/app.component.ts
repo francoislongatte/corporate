@@ -12,7 +12,7 @@ import { ScriptStoreService } from './core/service/scriptStore.service'
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
-import { isPlatformBrowser } from '@angular/common'
+import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT } from '@angular/common'
 
 @Component({
 	selector: 'main',
@@ -28,7 +28,8 @@ import { isPlatformBrowser } from '@angular/common'
 		CapabilitiesComponent,
 		FaqComponent,
 		AfterComponent,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		CommonModule
 	],
 	providers: [ScriptStoreService],
 	host: {
@@ -37,26 +38,21 @@ import { isPlatformBrowser } from '@angular/common'
 })
 export class AppComponent {
 	email = new FormControl('')
+	
 	constructor(
 		private script: ScriptStoreService,
 		private httpCLient: HttpClient,
-		@Inject(PLATFORM_ID) private readonly _platformId: Object
-	) {}
+		@Inject(PLATFORM_ID) private readonly _platformId: Object,
+		
+	) {
+		if (isPlatformServer(this._platformId)) {
+			console.log('is server')
+		}
+	}
 
 	popup() {
 		if (isPlatformBrowser(this._platformId)) {
 			this.script.openCalendly()
-		}
-	}
-
-	saveEmail() {
-		if (isPlatformBrowser(this._platformId)) {
-			alert('test')
-			this.httpCLient
-				.post('saveClient', {
-					email: this.email.value
-				})
-				.subscribe()
 		}
 	}
 }

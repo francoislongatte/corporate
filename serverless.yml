@@ -3,31 +3,15 @@ service: ssrserverless-angular
 plugins:
   - serverless-apigw-binary
   - serverless-api-compression
-  - serverless-plugin-custom-domain
+  - serverless-domain-manager
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x
   memorySize: 192
   timeout: 10
   region: eu-west-1
   stackName: ${param:envName}-ssrserverless-angular
-  tracing:
-    lambda: true
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource:
-        Fn::GetAtt:
-          - CustomerTable
-          - Arn
 
 package:
   exclude:
@@ -48,49 +32,60 @@ custom:
   apigwBinary:
     types:
       - '*/*'
+  customDomain:
+    domainName: dev.cobuildr.agency
+    basePath: ''
+    endpointType: REGIONAL
 
 resources:
   Resources:
-    SequenceTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: SequenceClientTable
-        AttributeDefinitions:
-          - AttributeName: sequenceClientId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: sequenceClientId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-
     CustomerTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: CustomerTable
         AttributeDefinitions:
-          - AttributeName: customerId
-            AttributeType: S
           - AttributeName: email
             AttributeType: S
         KeySchema:
-          - AttributeName: customerId
-            KeyType: HASH
           - AttributeName: email
-            KeyType: RANGE
-        LocalSecondaryIndexes:
-          - IndexName: emailIndex
-            KeySchema:
-              - AttributeName: customerId
-                KeyType: HASH
-              - AttributeName: email
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
+            KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
+
+    LambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: cobuildr-lambdaRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 'lambda.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: LambdaPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - dynamodb:DescribeTable
+                    - dynamodb:Query
+                    - dynamodb:Scan
+                    - dynamodb:GetItem
+                    - dynamodb:PutItem
+                    - dynamodb:UpdateItem
+                    - dynamodb:DeleteItem
+                    - s3:GetObject
+                    - s3:PutObject
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: '*'
 
 functions:
   api:
@@ -99,12 +94,10 @@ functions:
       - http:
           path: /
           method: ANY
+          cors: true
       - http:
-          path: /{proxy+}
+          path: '{proxy+}'
           method: ANY
-  saveClient:
-    handler: handler/saveClient.handler
-    events:
-      - http:
-          path: /saveClient
-          method: post
+          cors: true
+    role: LambdaRole
+    tracing: Active

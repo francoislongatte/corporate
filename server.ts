@@ -6,12 +6,11 @@ import * as express from 'express'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import bootstrap from './src/main.server'
-import * as compression from 'compression'
+import { saveEmail } from './handler/saveEmail'
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
 	const server = express()
-	server.use
 	const distFolder = join(process.cwd(), 'dist/angular-universal/browser')
 	const indexHtml = existsSync(join(distFolder, 'index.original.html'))
 		? join(distFolder, 'index.original.html')
@@ -22,13 +21,20 @@ export function app(): express.Express {
 	server.set('view engine', 'html')
 	server.set('views', distFolder)
 
+	server.use(express.json())
+	server.use(express.urlencoded({ extended: true }))
+
 	// Example Express Rest API endpoints
-	// server.get('/api/**', (req, res) => { });
+	server.post('/api/saveEmail', saveEmail)
+	server.post('/api/hello', (req: any, res) => {
+		console.log(req)
+		res.status(200).json({ message: 'test' })
+	})
 	// Serve static files from /browser
 	server.get(
 		'*.*',
 		express.static(distFolder, {
-			maxAge: '1y'
+			maxAge: '1s'
 		})
 	)
 
@@ -47,8 +53,6 @@ export function app(): express.Express {
 			.then((html) => res.send(html))
 			.catch((err) => next(err))
 	})
-
-	server.use(compression())
 
 	return server
 }

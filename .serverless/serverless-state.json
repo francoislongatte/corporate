@@ -6,34 +6,11 @@
     },
     "provider": {
       "name": "aws",
-      "runtime": "nodejs18.x",
+      "runtime": "nodejs16.x",
       "memorySize": 192,
       "timeout": 10,
       "region": "eu-west-1",
       "stackName": "dev-ssrserverless-angular",
-      "tracing": {
-        "lambda": true
-      },
-      "iamRoleStatements": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "dynamodb:DescribeTable",
-            "dynamodb:Query",
-            "dynamodb:Scan",
-            "dynamodb:GetItem",
-            "dynamodb:PutItem",
-            "dynamodb:UpdateItem",
-            "dynamodb:DeleteItem"
-          ],
-          "Resource": {
-            "Fn::GetAtt": [
-              "CustomerTable",
-              "Arn"
-            ]
-          }
-        }
-      ],
       "stage": "dev",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -115,103 +92,6 @@
               "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-api"
             }
           },
-          "SaveClientLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/ssrserverless-angular-dev-saveClient"
-            }
-          },
-          "IamRoleLambdaExecution": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-              "AssumeRolePolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Principal": {
-                      "Service": [
-                        "lambda.amazonaws.com"
-                      ]
-                    },
-                    "Action": [
-                      "sts:AssumeRole"
-                    ]
-                  }
-                ]
-              },
-              "Policies": [
-                {
-                  "PolicyName": {
-                    "Fn::Join": [
-                      "-",
-                      [
-                        "ssrserverless-angular",
-                        "dev",
-                        "lambda"
-                      ]
-                    ]
-                  },
-                  "PolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:CreateLogStream",
-                          "logs:CreateLogGroup",
-                          "logs:TagResource"
-                        ],
-                        "Resource": [
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*"
-                          }
-                        ]
-                      },
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:PutLogEvents"
-                        ],
-                        "Resource": [
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ssrserverless-angular-dev*:*:*"
-                          }
-                        ]
-                      },
-                      {
-                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
-                      },
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "xray:PutTraceSegments",
-                          "xray:PutTelemetryRecords"
-                        ],
-                        "Resource": [
-                          "*"
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ],
-              "Path": "/",
-              "RoleName": {
-                "Fn::Join": [
-                  "-",
-                  [
-                    "ssrserverless-angular",
-                    "dev",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    "lambdaRole"
-                  ]
-                ]
-              }
-            }
-          },
           "ApiLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -219,10 +99,10 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ssrserverless-angular/dev/1702384059727-2023-12-12T12:27:39.727Z/ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1702827830043-2023-12-17T15:43:50.043Z/ssrserverless-angular.zip"
               },
               "Handler": "handler/server.handler",
-              "Runtime": "nodejs18.x",
+              "Runtime": "nodejs16.x",
               "FunctionName": "ssrserverless-angular-dev-api",
               "MemorySize": 192,
               "Timeout": 10,
@@ -231,61 +111,24 @@
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "LambdaRole",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
-              "ApiLogGroup"
+              "ApiLogGroup",
+              "LambdaRole"
             ]
           },
-          "SaveClientLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/ssrserverless-angular/dev/1702384059727-2023-12-12T12:27:39.727Z/ssrserverless-angular.zip"
-              },
-              "Handler": "handler/saveClient.handler",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "ssrserverless-angular-dev-saveClient",
-              "MemorySize": 192,
-              "Timeout": 10,
-              "TracingConfig": {
-                "Mode": "Active"
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "SaveClientLogGroup"
-            ]
-          },
-          "ApiLambdaVersionCEtsH4iFH2W1gebXtZH1YmzbFFQiKGvvPEhpsELXQ": {
+          "ApiLambdaVersion5sT8u8IiYVDZCf9wQeY6a9YgLXGwAVNZeBUgoLfNGRI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "agevB9VCcniBKxVq42kLyn6bOCq9iEDueZ1G+fHF4jA="
-            }
-          },
-          "SaveClientLambdaVersionJUsoZvNStD9fhXVmC3hHIEDTXCMO96boO44jFdxI": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "SaveClientLambdaFunction"
-              },
-              "CodeSha256": "agevB9VCcniBKxVq42kLyn6bOCq9iEDueZ1G+fHF4jA="
+              "CodeSha256": "r4SF1oXEqB4UNKAQLfx+lt5KvPM+5dVcn2G1mioZl+w="
             }
           },
           "ApiGatewayRestApi": {
@@ -316,16 +159,94 @@
               }
             }
           },
-          "ApiGatewayResourceSaveclient": {
-            "Type": "AWS::ApiGateway::Resource",
+          "ApiGatewayMethodOptions": {
+            "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "ParentId": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
                 "Fn::GetAtt": [
                   "ApiGatewayRestApi",
                   "RootResourceId"
                 ]
               },
-              "PathPart": "saveClient",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodProxyVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProxyVar"
+              },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -426,53 +347,7 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodSaveclientPost": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "POST",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceSaveclient"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "SaveClientLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "SaveClientLambdaPermissionApiGateway"
-            ]
-          },
-          "ApiGatewayDeployment1702384039771": {
+          "ApiGatewayDeployment1702827788966": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -481,9 +356,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
+              "ApiGatewayMethodOptions",
+              "ApiGatewayMethodProxyVarOptions",
               "ApiGatewayMethodAny",
-              "ApiGatewayMethodProxyVarAny",
-              "ApiGatewayMethodSaveclientPost"
+              "ApiGatewayMethodProxyVarAny"
             ]
           },
           "ApiLambdaPermissionApiGateway": {
@@ -523,111 +399,76 @@
               }
             }
           },
-          "SaveClientLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "SaveClientLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "SequenceTable": {
-            "Type": "AWS::DynamoDB::Table",
-            "Properties": {
-              "TableName": "SequenceClientTable",
-              "AttributeDefinitions": [
-                {
-                  "AttributeName": "sequenceClientId",
-                  "AttributeType": "S"
-                }
-              ],
-              "KeySchema": [
-                {
-                  "AttributeName": "sequenceClientId",
-                  "KeyType": "HASH"
-                }
-              ],
-              "ProvisionedThroughput": {
-                "ReadCapacityUnits": 5,
-                "WriteCapacityUnits": 5
-              }
-            }
-          },
           "CustomerTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "TableName": "CustomerTable",
               "AttributeDefinitions": [
                 {
-                  "AttributeName": "customerId",
-                  "AttributeType": "S"
-                },
-                {
                   "AttributeName": "email",
                   "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
-                  "AttributeName": "customerId",
-                  "KeyType": "HASH"
-                },
-                {
                   "AttributeName": "email",
-                  "KeyType": "RANGE"
-                }
-              ],
-              "LocalSecondaryIndexes": [
-                {
-                  "IndexName": "emailIndex",
-                  "KeySchema": [
-                    {
-                      "AttributeName": "customerId",
-                      "KeyType": "HASH"
-                    },
-                    {
-                      "AttributeName": "email",
-                      "KeyType": "RANGE"
-                    }
-                  ],
-                  "Projection": {
-                    "ProjectionType": "ALL"
-                  }
+                  "KeyType": "HASH"
                 }
               ],
               "ProvisionedThroughput": {
                 "ReadCapacityUnits": 5,
                 "WriteCapacityUnits": 5
               }
+            }
+          },
+          "LambdaRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "RoleName": "cobuildr-lambdaRole",
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": "LambdaPolicy",
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "dynamodb:DescribeTable",
+                          "dynamodb:Query",
+                          "dynamodb:Scan",
+                          "dynamodb:GetItem",
+                          "dynamodb:PutItem",
+                          "dynamodb:UpdateItem",
+                          "dynamodb:DeleteItem",
+                          "s3:GetObject",
+                          "s3:PutObject",
+                          "logs:CreateLogGroup",
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": "*"
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           }
         },
@@ -643,19 +484,10 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionCEtsH4iFH2W1gebXtZH1YmzbFFQiKGvvPEhpsELXQ"
+              "Ref": "ApiLambdaVersion5sT8u8IiYVDZCf9wQeY6a9YgLXGwAVNZeBUgoLfNGRI"
             },
             "Export": {
               "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"
-            }
-          },
-          "SaveClientLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "SaveClientLambdaVersionJUsoZvNStD9fhXVmC3hHIEDTXCMO96boO44jFdxI"
-            },
-            "Export": {
-              "Name": "sls-ssrserverless-angular-dev-SaveClientLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -776,12 +608,17 @@
         "types": [
           "*/*"
         ]
+      },
+      "customDomain": {
+        "domainName": "dev.cobuildr.agency",
+        "basePath": "",
+        "endpointType": "REGIONAL"
       }
     },
     "plugins": [
       "serverless-apigw-binary",
       "serverless-api-compression",
-      "serverless-plugin-custom-domain"
+      "serverless-domain-manager"
     ],
     "pluginsData": {},
     "functions": {
@@ -792,6 +629,23 @@
             "http": {
               "path": "",
               "method": "any",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "ANY"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
               "integration": "AWS_PROXY"
             }
           },
@@ -799,53 +653,53 @@
             "http": {
               "path": "{proxy+}",
               "method": "any",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "ANY"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
               "integration": "AWS_PROXY"
             }
           }
         ],
+        "role": "LambdaRole",
+        "tracing": "Active",
         "name": "ssrserverless-angular-dev-api",
         "package": {},
         "memory": 192,
         "timeout": 10,
-        "runtime": "nodejs18.x",
+        "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionCEtsH4iFH2W1gebXtZH1YmzbFFQiKGvvPEhpsELXQ"
-      },
-      "saveClient": {
-        "handler": "handler/saveClient.handler",
-        "events": [
-          {
-            "http": {
-              "path": "saveClient",
-              "method": "post",
-              "integration": "AWS_PROXY"
-            }
-          }
-        ],
-        "name": "ssrserverless-angular-dev-saveClient",
-        "package": {},
-        "memory": 192,
-        "timeout": 10,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "SaveClientLambdaVersionJUsoZvNStD9fhXVmC3hHIEDTXCMO96boO44jFdxI"
+        "versionLogicalId": "ApiLambdaVersion5sT8u8IiYVDZCf9wQeY6a9YgLXGwAVNZeBUgoLfNGRI"
       }
     },
     "resources": {
       "Resources": {
-        "SequenceTable": {
+        "CustomerTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "SequenceClientTable",
+            "TableName": "CustomerTable",
             "AttributeDefinitions": [
               {
-                "AttributeName": "sequenceClientId",
+                "AttributeName": "email",
                 "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
-                "AttributeName": "sequenceClientId",
+                "AttributeName": "email",
                 "KeyType": "HASH"
               }
             ],
@@ -855,52 +709,54 @@
             }
           }
         },
-        "CustomerTable": {
-          "Type": "AWS::DynamoDB::Table",
+        "LambdaRole": {
+          "Type": "AWS::IAM::Role",
           "Properties": {
-            "TableName": "CustomerTable",
-            "AttributeDefinitions": [
-              {
-                "AttributeName": "customerId",
-                "AttributeType": "S"
-              },
-              {
-                "AttributeName": "email",
-                "AttributeType": "S"
-              }
-            ],
-            "KeySchema": [
-              {
-                "AttributeName": "customerId",
-                "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "email",
-                "KeyType": "RANGE"
-              }
-            ],
-            "LocalSecondaryIndexes": [
-              {
-                "IndexName": "emailIndex",
-                "KeySchema": [
-                  {
-                    "AttributeName": "customerId",
-                    "KeyType": "HASH"
+            "RoleName": "cobuildr-lambdaRole",
+            "AssumeRolePolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": [
+                      "lambda.amazonaws.com"
+                    ]
                   },
-                  {
-                    "AttributeName": "email",
-                    "KeyType": "RANGE"
-                  }
-                ],
-                "Projection": {
-                  "ProjectionType": "ALL"
+                  "Action": [
+                    "sts:AssumeRole"
+                  ]
+                }
+              ]
+            },
+            "Policies": [
+              {
+                "PolicyName": "LambdaPolicy",
+                "PolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Action": [
+                        "dynamodb:DescribeTable",
+                        "dynamodb:Query",
+                        "dynamodb:Scan",
+                        "dynamodb:GetItem",
+                        "dynamodb:PutItem",
+                        "dynamodb:UpdateItem",
+                        "dynamodb:DeleteItem",
+                        "s3:GetObject",
+                        "s3:PutObject",
+                        "logs:CreateLogGroup",
+                        "logs:CreateLogStream",
+                        "logs:PutLogEvents"
+                      ],
+                      "Resource": "*"
+                    }
+                  ]
                 }
               }
-            ],
-            "ProvisionedThroughput": {
-              "ReadCapacityUnits": 5,
-              "WriteCapacityUnits": 5
-            }
+            ]
           }
         }
       },
@@ -933,7 +789,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/ssrserverless-angular/dev/code-artifacts",
         "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip",
-        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702384059727-2023-12-12T12:27:39.727Z"
+        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702827830043-2023-12-17T15:43:50.043Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -950,7 +806,7 @@
     "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702384059727-2023-12-12T12:27:39.727Z",
+    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1702827830043-2023-12-17T15:43:50.043Z",
     "artifact": "ssrserverless-angular.zip"
   }
 }
