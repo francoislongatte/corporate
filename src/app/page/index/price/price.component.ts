@@ -3,26 +3,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { DialogModule, Dialog } from '@angular/cdk/dialog'
 import { SaveEmailComponent } from 'src/app/modal/saveEmail/saveEmail.component'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common'
+import { ButtonComponent } from 'src/app/core/component/button/button.component'
 
 @Component({
 	selector: '.price',
 	standalone: true,
-	imports: [DialogModule],
+	imports: [DialogModule, ButtonComponent],
 	templateUrl: './price.component.html',
-	styleUrls: ['./price.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PriceComponent {
-	
+	lists = [
+		[
+			'Unlimited requests',
+			'Unlimited revisions',
+			'Average 2-3 days delivery',
+			'Async communication'
+		],
+		['No hiring process', 'Pause or cancel anytime', 'No contracts', 'No meetings']
+	]
 	constructor(
 		@Inject(PLATFORM_ID) private readonly _platformId: Object,
 		public dialog: Dialog
-	) {
-		
-	}
+	) {}
 	openDialog(): void {
 		if (isPlatformBrowser(this._platformId)) {
-			console.log('dialog')
 			const dialogRef = this.dialog.open<string>(SaveEmailComponent, {
 				width: '600px'
 			})

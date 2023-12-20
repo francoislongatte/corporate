@@ -1,0 +1,44 @@
+:host {
+	display: block;
+	box-sizing: border-box !important;
+	font-family: 'Inter';
+	font-size: 16px !important;
+	font-weight: 600;
+	line-height: 12px;
+	padding: 20px 32px;
+	border-radius: 16px;
+	background-color: #100f0f;
+	color: #fefefe;
+	border: none;
+	box-shadow:
+		inset 0px 1px 0 #100f0f,
+		inset 0px 2px 0 #868079,
+		0px 1px 2px 0px rgba(16, 15, 15, 0.1),
+		0px 3px 3px 0px rgba(16, 15, 15, 0.09),
+		0px 7px 4px 0px rgba(16, 15, 15, 0.05),
+		0px 13px 5px 0px rgba(16, 15, 15, 0.01),
+		0px 20px 6px 0px rgba(16, 15, 15, 0);
+	background: radial-gradient(
+			50% 50% at 50% 0%,
+			rgba(255, 132, 0, 0.2) 0%,
+			rgba(255, 132, 0, 0) 100%
+		),
+		var(--Grey-Grey---900, #100f0f);
+}
+
+:host:hover {
+	background-color: #f0f0ef;
+	background: radial-gradient(
+			50% 50% at 50% 0%,
+			rgba(255, 132, 0, 0.5) 0%,
+			rgba(255, 132, 0, 0) 100%
+		),
+		var(--Grey-Grey---900, #100f0f);
+}
+
+:host > span {
+	background: linear-gradient(180deg, #f0f0ef 79.17%, rgba(240, 240, 239, 0.75) 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

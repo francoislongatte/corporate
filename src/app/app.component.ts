@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT } from '@angular/common'
+import { ButtonComponent } from './core/component/button/button.component'
 
 @Component({
 	selector: 'main',
@@ -29,26 +30,21 @@ import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT } from '@an
 		FaqComponent,
 		AfterComponent,
 		ReactiveFormsModule,
-		CommonModule
+		CommonModule,
+		ButtonComponent
 	],
 	providers: [ScriptStoreService],
 	host: {
-		class: 'antialiased block bg-[#FFFEFC] lg:mt-20 mt-8 lg:px-6 px-4'
+		class: 'antialiased block bg-[#FFFEFC] lg:mt-20 mt-16 lg:px-6 px-4'
 	}
 })
 export class AppComponent {
 	email = new FormControl('')
-	
+
 	constructor(
 		private script: ScriptStoreService,
-		private httpCLient: HttpClient,
-		@Inject(PLATFORM_ID) private readonly _platformId: Object,
-		
-	) {
-		if (isPlatformServer(this._platformId)) {
-			console.log('is server')
-		}
-	}
+		@Inject(PLATFORM_ID) private readonly _platformId: Object
+	) {}
 
 	popup() {
 		if (isPlatformBrowser(this._platformId)) {

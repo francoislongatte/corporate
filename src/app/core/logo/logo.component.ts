@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common'
 	selector: '.logo',
 	standalone: true,
 	imports: [],
-	templateUrl: './logo.component.html'
+	templateUrl: './logo.component.html',
+	host: {
+		class: 'flex items-center gap-1.5'
+	}
 })
 export class LogoComponent {}

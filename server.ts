@@ -27,7 +27,6 @@ export function app(): express.Express {
 	// Example Express Rest API endpoints
 	server.post('/api/saveEmail', saveEmail)
 	server.post('/api/hello', (req: any, res) => {
-		console.log(req)
 		res.status(200).json({ message: 'test' })
 	})
 	// Serve static files from /browser

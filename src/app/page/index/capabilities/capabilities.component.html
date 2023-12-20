@@ -1,36 +1,31 @@
 <div class="flex">
-	<p class="pr-4 text-xl font-semibold leading-none">Our capabilities</p>
-	<span class="block flex-1 border-b-2 border-stone-300"></span>
+	<p class="text-xl font-medium leading-normal text-stone-700">Our capabilities</p>
 </div>
 
-<div class="hs-accordion-group mt-5 md:mt-8" data-hs-accordion-always-open>
-	@for (item of data; track item.text; let idx = $index) {
-	<div class="hs-accordion" [id]="'heading-' + idx">
-		<button
-			class="hs-accordion-toggle inline-flex w-full items-center justify-between gap-x-3 rounded-lg py-5 text-start font-semibold md:py-8"
-			aria-controls="heading-one-collapse-one"
-		>
-			<span class="text-xl font-semibold md:text-3xl">{{ item.title }}</span>
-			<div class="flex items-center">
-				<span
-					class="flex h-6 w-6 items-center justify-center rounded-full border-2 text-base font-semibold md:h-12 md:w-12 md:text-3xl"
-				>
-					<ng-icon name="heroPlusSolid"></ng-icon>
-				</span>
-			</div>
-		</button>
-		<div
-			id="heading-one-collapse-one"
-			class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-			aria-labelledby="heading-one"
-		>
-			<p class="text-gray-800 dark:text-gray-200">
-				<em>This is the third item's accordion body.</em> It is hidden by default, until the
-				collapse plugin adds the appropriate classes that we use to style each element. These
-				classes control the overall appearance, as well as the showing and hiding via CSS
-				transitions.
-			</p>
-		</div>
-	</div>
+<div class="mt-5 flex flex-col sm:flex-row md:mt-8" data-hs-accordion-always-open>
+	@for (items of data; track items) {
+	<ul class="flex-1">
+		@for (item of items; track item.title) {
+		<li class="flex gap-2 py-2">
+			<svg
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<g id="Bullet">
+					<circle id="Circle" cx="12" cy="12" r="12" fill="#FFF0E0" />
+					<path
+						id="Star"
+						d="M12.5024 6H11.5024V10.1373L9.43333 6.55356L8.56731 7.05356L10.6333 10.6319L7.05619 8.56667L6.55619 9.43269L10.1362 11.4996H6V12.4996H10.1322L6.55198 14.5667L7.05198 15.4327L10.6333 13.365L8.56577 16.9461L9.43179 17.4461L11.5024 13.8597V18H12.5024V13.8693L14.5673 17.4459L15.4333 16.9459L13.3653 13.3639L16.9485 15.4327L17.4485 14.5667L13.8683 12.4996H18V11.4996H13.8643L17.4443 9.43269L16.9443 8.56667L13.3653 10.633L15.4318 7.05376L14.5658 6.55376L12.5024 10.1276V6Z"
+						fill="#C76700"
+					/>
+				</g>
+			</svg>
+			{{ item.title }}
+		</li>
+		}
+	</ul>
 	}
 </div>

@@ -1,19 +1,18 @@
 <div class="flex">
-	<p class="pr-4 text-xl font-semibold leading-none">FAQ</p>
-	<span class="block flex-1 border-b-2 border-stone-300"></span>
+	<p class="text-xl font-medium leading-normal">FAQ</p>
 </div>
 
 <div class="hs-accordion-group pt-5 md:pt-8" data-hs-accordion-always-open>
 	@for (item of data; track item.text; let idx = $index) {
 	<div class="hs-accordion" [id]="'heading-' + idx">
 		<button
-			class="hs-accordion-toggle inline-flex w-full items-center justify-between py-5 text-start font-semibold md:py-8"
+			class="hs-accordion-toggle inline-flex w-full items-center justify-between border-b-[1px] py-5 text-start"
 			aria-controls="heading-one-collapse-one"
 		>
-			<span class="text-xl font-semibold md:text-3xl">{{ item.title }}</span>
+			<span class="text-xl font-medium leading-normal">{{ item.title }}</span>
 			<div class="flex items-center">
 				<span
-					class="text-md flex h-6 w-6 items-center justify-center rounded-full border-2 font-semibold text-black hs-accordion-active:border-0 hs-accordion-active:bg-black hs-accordion-active:text-white md:h-12 md:w-12 md:text-3xl"
+					class="text-md flex h-6 w-6 items-center justify-center hs-accordion-active:border-0 md:h-12 md:w-12 md:text-3xl"
 				>
 					<ng-icon class="hs-accordion-active:hidden" name="heroPlusSolid"></ng-icon>
 					<ng-icon
@@ -31,7 +30,7 @@
 		>
 			<p
 				[innerHTML]="item.text"
-				class="pb-5 text-base leading-relaxed md:pb-8 md:text-xl md:leading-loose"
+				class="pb-5 text-base leading-relaxed md:pb-8 md:text-xl md:leading-normal"
 			></p>
 		</div>
 	</div>

@@ -1,76 +1,51 @@
 <div class="flex">
-	<p class="pr-4 text-xl font-semibold leading-none">How much is it?</p>
-	<span class="block flex-1 border-b-2 border-stone-300"></span>
+	<p class="text-xl font-medium leading-normal">Plan</p>
 </div>
 
 <div class="mt-5 md:mt-8">
-	<div class="relative">
-		<!-- Grid -->
-		<div class="flex flex-wrap">
-			<div class="h-auto w-full pb-3 md:w-1/2 md:pb-8 md:pr-3">
-				<!-- Card -->
-				<div
-					class="flex h-full w-full flex-col justify-between rounded-2xl border-2 border-stone-950 bg-gradient-to-br from-orange-100 to-white px-8 py-10 shadow"
-				>
-					<div>
-						<h3 class="text-base font-semibold lg:text-xl">Starter</h3>
-
-						<div class="mt-2">
-							<span class="text-2xl font-semibold md:text-3xl">1999,00 €</span>
-							<span class="ml-1 text-neutral-500">/mo.</span>
-						</div>
-						<div class="pt-2">Pause or cancel anytime</div>
-
-						<div class="pt-4 md:pt-6">
-							<p>Up to 20 hours per month of our time for your team to use however you need</p>
-						</div>
-					</div>
-
-					<div class="py-4 first:pt-0 last:pb-0">
-						<button
-							type="button"
-							class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-gray-800 px-4 py-3 text-sm font-semibold text-white hover:bg-gray-900 disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-						>
-							Get started
-						</button>
-					</div>
+	<div
+		class="h-auto w-full rounded-3xl bg-gradient-to-br from-orange-200 via-orange-500 to-orange-300 p-2"
+	>
+		<!-- Card -->
+		<div
+			class="box-border h-full w-full rounded-2xl bg-gradient-to-br from-orange-100 to-white px-8 py-8 shadow"
+		>
+			<div>
+				<h3 class="text-xl font-medium leading-normal">Monthly</h3>
+				<p class="py-2 text-3xl font-semibold leading-10 md:text-3xl">4999,00 €</p>
+				<p class="leading-relaxed">
+					Ideal for those with ongoing needs and a passion for growth—unlimited requests welcome.
+				</p>
+				<div class="flex gap-4 pt-6">
+					<button type="button" (click)="openDialog()">Get started</button>
+					<button type="button" (click)="openDialog()">Book a call</button>
 				</div>
-				<!-- End Card -->
-			</div>
-
-			<div class="h-auto w-full pb-3 md:w-1/2 md:pb-8 md:pl-3">
-				<!-- Card -->
-				<div
-					class="flex h-full w-full flex-col justify-between rounded-2xl border-2 border-stone-950 bg-gradient-to-br from-orange-100 to-white px-8 py-10 shadow"
-				>
-					<div>
-						<h3 class="inline-flex items-center justify-center text-base font-semibold lg:text-xl">
-							Monthly
-							<span class="ml-2 rounded-xl bg-orange-500 px-3 py-1.5 text-xs leading-none"
-								>Most popular</span
+				<div class="flex flex-col pt-5 sm:flex-row">
+					@for (list of lists; track list) {
+					<ul class="flex-1">
+						@for (item of list; track item) {
+						<li class="flex gap-2 py-2">
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
 							>
-						</h3>
-
-						<div class="mt-2">
-							<span class="text-2xl font-semibold md:text-3xl">4999,00 €</span>
-							<span class="ml-1 text-neutral-500">/mo.</span>
-						</div>
-						<div class="pt-2">Pause or cancel anytime</div>
-
-						<div class="pt-4 md:pt-6">
-							<p>Gives you the most freedom. Perfect to start and try our services</p>
-						</div>
-					</div>
-
-					<div class="py-4 first:pt-0 last:pb-0">
-						<button
-							(click)="openDialog()"
-							type="button"
-							class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-gray-800 px-4 py-3 text-sm font-semibold text-white hover:bg-gray-900 disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-						>
-							Get started
-						</button>
-					</div>
+								<g id="Bullet">
+									<circle id="Circle" cx="12" cy="12" r="12" fill="#FFF0E0" />
+									<path
+										id="Star"
+										d="M12.5024 6H11.5024V10.1373L9.43333 6.55356L8.56731 7.05356L10.6333 10.6319L7.05619 8.56667L6.55619 9.43269L10.1362 11.4996H6V12.4996H10.1322L6.55198 14.5667L7.05198 15.4327L10.6333 13.365L8.56577 16.9461L9.43179 17.4461L11.5024 13.8597V18H12.5024V13.8693L14.5673 17.4459L15.4333 16.9459L13.3653 13.3639L16.9485 15.4327L17.4485 14.5667L13.8683 12.4996H18V11.4996H13.8643L17.4443 9.43269L16.9443 8.56667L13.3653 10.633L15.4318 7.05376L14.5658 6.55376L12.5024 10.1276V6Z"
+										fill="#C76700"
+									/>
+								</g>
+							</svg>
+							{{ item }}
+						</li>
+						}
+					</ul>
+					}
 				</div>
 			</div>
 		</div>

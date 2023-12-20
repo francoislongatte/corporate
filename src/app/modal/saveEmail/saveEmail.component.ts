@@ -13,15 +13,15 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common'
 import { BackService, validateEmail } from 'src/app/core/service/back.service'
 import { catchError, finalize } from 'rxjs/operators'
 import { of } from 'rxjs'
+import { ButtonComponent } from 'src/app/core/component/button/button.component'
 
 @Component({
 	selector: 'app-save-email',
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, ButtonComponent],
 	providers: [BackService],
 	templateUrl: './saveEmail.component.html',
-	styleUrl: './saveEmail.component.css',
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrl: './saveEmail.component.css'
 })
 export class SaveEmailComponent {
 	baseURL!: string
@@ -47,7 +47,6 @@ export class SaveEmailComponent {
 		if (validateEmail(this.email)) {
 			this.backService.saveEmail(this.email).subscribe({
 				next: (data: any) => {
-					console.log(data, 'ok')
 					this.payload = {
 						state: 'success',
 						message: data.message
@@ -55,15 +54,14 @@ export class SaveEmailComponent {
 					setTimeout(() => {
 						this.dialogRef.close()
 					}, 5000)
-					this.cdr.detectChanges()
+					//this.cdr.detectChanges()
 				},
 				error: (data: any) => {
-					console.log(data, 'pas du tout')
 					this.payload = {
 						state: 'error',
 						message: data.error.message
 					}
-					this.cdr.detectChanges()
+					//this.cdr.detectChanges()
 				}
 			})
 		} else {
