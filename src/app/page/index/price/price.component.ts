@@ -4,11 +4,13 @@ import { DialogModule, Dialog } from '@angular/cdk/dialog'
 import { SaveEmailComponent } from 'src/app/modal/saveEmail/saveEmail.component'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common'
 import { ButtonComponent } from 'src/app/core/component/button/button.component'
+import { ScriptStoreService } from 'src/app/core/service/scriptStore.service'
 
 @Component({
 	selector: '.price',
 	standalone: true,
 	imports: [DialogModule, ButtonComponent],
+	providers: [ScriptStoreService],
 	templateUrl: './price.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -23,6 +25,7 @@ export class PriceComponent {
 		['No hiring process', 'Pause or cancel anytime', 'No contracts', 'No meetings']
 	]
 	constructor(
+		private script: ScriptStoreService,
 		@Inject(PLATFORM_ID) private readonly _platformId: Object,
 		public dialog: Dialog
 	) {}
@@ -31,6 +34,11 @@ export class PriceComponent {
 			const dialogRef = this.dialog.open<string>(SaveEmailComponent, {
 				width: '600px'
 			})
+		}
+	}
+	popup() {
+		if (isPlatformBrowser(this._platformId)) {
+			this.script.openCalendly()
 		}
 	}
 }

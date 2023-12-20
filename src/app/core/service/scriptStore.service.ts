@@ -33,7 +33,9 @@ export class ScriptStoreService {
 	openCalendly() {
 		this.addScriptToStore('calendly')
 		this.loadScript('calendly').then(() => {
-			;(window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/cobuildr/30min' })
+			;(window as any).Calendly.initPopupWidget({
+				url: 'https://calendly.com/cobuildr_agency/30min'
+			})
 		})
 	}
 
