@@ -55,7 +55,17 @@ export class AppComponent {
 			{ name: 'author', content: 'Iacuzzo Giovanni & Longatte Francois' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 			{ name: 'date', content: '2023-12-21', scheme: 'YYYY-MM-DD' },
-			{ charset: 'UTF-8' }
+			{ charset: 'UTF-8' },
+			/// Facebook
+			{ name: 'og:title', content: 'Add title here'},
+			{ name: 'og:description', content: 'Add description here'},
+			{ name: 'og:image', content: 'https://your-website.com/og-image.png'},
+			{ name: 'og:url', content: 'https://your-website.com'},
+			/// Twitter
+			{ name: 'twitter:title', content: 'Add title here'},
+			{ name: 'twitter:description', content: 'Add description here'},
+			{ name: 'twitter:url', content: 'https://your-website.com/twitter-image.png'},
+			{ name: 'twitter:card', content: 'summary'},
 		])
 	}
 

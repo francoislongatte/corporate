@@ -11,7 +11,9 @@
 		"serve:ssr": "node dist/angular-universal/server/main.js",
 		"build:ssr": "ng build --configuration production && ng run angular-universal:server:production",
 		"prerender": "ng run angular-universal:prerender",
-		"deploy": "npm run build:ssr && serverless deploy --param=envName=dev"
+		"deploy": "npm run build:ssr && serverless deploy --param=envName=dev",
+		"sitemap:dev": "ngx-sitemap ./dist/angular-universal/browser https://dev.cobuildr.agency",
+		"sitemap:prod": "ngx-sitemap ./dist/angular-universal/browser https://cobuildr.agency"
 	},
 	"private": true,
 	"dependencies": {
@@ -53,6 +55,7 @@
 		"karma-coverage": "~2.2.0",
 		"karma-jasmine": "~5.1.0",
 		"karma-jasmine-html-reporter": "~2.1.0",
+		"ngx-sitemap": "^1.0.0",
 		"postcss": "^8.4.29",
 		"prettier": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.7",
