@@ -14,7 +14,7 @@ import { provideIcons, NgIconComponent } from '@ng-icons/core'
 export class FaqComponent {
 	data = [
 		{
-			title: 'Why Company instead of hiring?',
+			title: 'Why Cobuildr instead of hiring?',
 			text: 'Lorem ipsum dolor sit amet consectetur. Risus aliquet senectus commodo consequat libero. Laoreet auctor nulla et venenatis duis cras quis. Velit nibh amet sit dignissim elementum. Laoreet tristique nulla dui diam. Augue montes viverra eget egestas in. <br/> <br/> Potenti ipsum lacus aenean euismod nibh phasellus et tortor quam. Cursus ultrices malesuada in id consequat duis. Porta dui mauris curabitur aliquet nulla. Sit ac fames aliquam enim duis molestie purus. Vel enim odio nisl viverra nisl sagittis vitae. Erat lobortis nisl amet nunc morbi semper iaculis fames.'
 		},
 		{
@@ -27,10 +27,6 @@ export class FaqComponent {
 		},
 		{
 			title: 'What does “One request at a time” mean?',
-			text: 'Lorem ipsum dolor sit amet consectetur. Risus aliquet senectus commodo consequat libero. Laoreet auctor nulla et venenatis duis cras quis. Velit nibh amet sit dignissim elementum. Laoreet tristique nulla dui diam. Augue montes viverra eget egestas in. Potenti ipsum lacus aenean euismod nibh phasellus et tortor quam. Cursus ultrices malesuada in id consequat duis. Porta dui mauris curabitur aliquet nulla. Sit ac fames aliquam enim duis molestie purus. Vel enim odio nisl viverra nisl sagittis vitae. Erat lobortis nisl amet nunc morbi semper iaculis fames.'
-		},
-		{
-			title: 'How do I manage my subscription?',
 			text: 'Lorem ipsum dolor sit amet consectetur. Risus aliquet senectus commodo consequat libero. Laoreet auctor nulla et venenatis duis cras quis. Velit nibh amet sit dignissim elementum. Laoreet tristique nulla dui diam. Augue montes viverra eget egestas in. Potenti ipsum lacus aenean euismod nibh phasellus et tortor quam. Cursus ultrices malesuada in id consequat duis. Porta dui mauris curabitur aliquet nulla. Sit ac fames aliquam enim duis molestie purus. Vel enim odio nisl viverra nisl sagittis vitae. Erat lobortis nisl amet nunc morbi semper iaculis fames.'
 		},
 		{
