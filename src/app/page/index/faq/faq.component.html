@@ -7,7 +7,7 @@
 	<div class="hs-accordion" [id]="'heading-' + idx">
 		<button
 			class="hs-accordion-toggle inline-flex w-full items-center justify-between border-b-[1px] py-5 text-start"
-			aria-controls="heading-one-collapse-one"
+			[attr.aria-controls]="'heading-one-collapse-' + idx"
 		>
 			<span class="text-xl font-medium leading-normal">{{ item.title }}</span>
 			<div class="flex items-center">
@@ -24,7 +24,7 @@
 			</div>
 		</button>
 		<div
-			id="heading-one-collapse-one"
+			[id]="'heading-one-collapse-' + idx"
 			class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
 			[attr.aria-labelledby]="'heading-' + idx"
 		>

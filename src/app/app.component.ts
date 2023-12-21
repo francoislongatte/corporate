@@ -11,9 +11,9 @@ import { AfterComponent } from './page/index/after/after.component'
 import { ScriptStoreService } from './core/service/scriptStore.service'
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormControl } from '@angular/forms'
-import { HttpClient } from '@angular/common/http'
-import { CommonModule, isPlatformBrowser, isPlatformServer, DOCUMENT } from '@angular/common'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { ButtonComponent } from './core/component/button/button.component'
+import { Meta, Title } from '@angular/platform-browser'
 
 @Component({
 	selector: 'main',
@@ -42,9 +42,22 @@ export class AppComponent {
 	email = new FormControl('')
 
 	constructor(
+		private metaTagService: Meta,
+		private titleService: Title,
 		private script: ScriptStoreService,
 		@Inject(PLATFORM_ID) private readonly _platformId: Object
-	) {}
+	) {
+		this.titleService.setTitle('Cobuildr')
+		this.metaTagService.addTags([
+			{ name: 'description', content: 'Design and development as a service' },
+			{ name: 'keywords', content: 'Digital partner, subscription, agency' },
+			{ name: 'robots', content: 'index, follow' },
+			{ name: 'author', content: 'Iacuzzo Giovanni & Longatte Francois' },
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			{ name: 'date', content: '2023-12-21', scheme: 'YYYY-MM-DD' },
+			{ charset: 'UTF-8' }
+		])
+	}
 
 	popup() {
 		if (isPlatformBrowser(this._platformId)) {
