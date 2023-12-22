@@ -1,11 +1,11 @@
-<h1 class="font-['Inter'] text-3xl font-semibold leading-tight md:text-5xl">
+<h1 class="font-['Inter'] text-3xl font-semibold tracking-tight leading-tight md:leading-tight md:text-5xl">
 	Your digital partner, not just a subscription agency.
 </h1>
-<span class="mt-4 inline-block font-['Inter'] text-base leading-relaxed md:mt-8 lg:leading-loose">
+<span class="mt-4 inline-block font-['Inter'] text-base leading-relaxed md:mt-5">
 	Limitless possibilities with no contracts, just a simple monthly fee. We focus on creating
 	high-quality digital solutions.
 </span>
-<div class="flex gap-2 pt-5">
+<div class="flex gap-4 mt-5">
 	<button (click)="goToPlan()" class="flex-initial" type="button">Check our plan</button>
 	<button
 		(click)="popup()"
@@ -15,11 +15,11 @@
 		Book a call
 	</button>
 </div>
-<div class="flex flex-col pt-5 sm:flex-row">
+<div class="flex flex-col mt-5 sm:flex-row">
 	@for (list of lists; track list) {
 	<ul class="flex-1">
 		@for (item of list; track item) {
-		<li class="flex gap-2 py-2">
+		<li class="flex gap-2 py-2 text-base leading-tight tracking-tight font-medium content-center items-center">
 			<svg
 				width="24"
 				height="24"
@@ -36,7 +36,7 @@
 					/>
 				</g>
 			</svg>
-			{{ item }}
+			<span>{{ item }}</span>
 		</li>
 		}
 	</ul>

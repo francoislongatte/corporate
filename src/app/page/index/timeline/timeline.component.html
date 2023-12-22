@@ -1,11 +1,11 @@
 <div class="flex">
-	<p class="text-xl font-medium leading-normal text-stone-700">How does it work?</p>
+	<p class="text-xl font-medium tracking-tight leading-tight text-stone-700">How does it work?</p>
 </div>
 
-<ul class="mt-5 text-sm md:mt-8">
+<ul class="mt-5 text-sm md:mt-8 space-y-8">
 	@for (item of data; track item.text;) {
-	<li class="flex gap-4 py-5 md:py-8">
-		<div class="pt-0.5">
+	<li class="flex gap-4">
+		<div>
 			<svg
 				width="24"
 				height="24"
@@ -24,10 +24,10 @@
 			</svg>
 		</div>
 		<div class="flex flex-col items-start gap-2">
-			<p class="text-center text-xl font-medium md:text-3xl">
+			<p class="text-xl font-medium tracking-tight leading-tight">
 				{{ item.title }}
 			</p>
-			<p class="text-base leading-relaxed md:text-xl md:leading-loose">
+			<p class="text-base leading-normal">
 				{{ item.text }}
 			</p>
 		</div>
