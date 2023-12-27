@@ -12,7 +12,7 @@ import { ScriptStoreService } from 'src/app/core/service/scriptStore.service'
 	templateUrl: './header.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'pt-8 lg:pt-16'
+		class: 'pt-8 md:pt-16'
 	}
 })
 export class HeaderComponent {

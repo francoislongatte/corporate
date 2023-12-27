@@ -1,16 +1,16 @@
-<h1 class="font-['Inter'] text-3xl font-semibold tracking-tight leading-tight md:leading-tight md:text-5xl">
+<h1 class="font-['Inter'] text-3xl font-semibold tracking-tight leading-tight md:text-5xl">
 	Your digital partner, not just a subscription agency.
 </h1>
-<span class="mt-4 inline-block font-['Inter'] text-base leading-relaxed md:mt-5">
+<span class="mt-4 inline-block font-['Inter'] font-normal text-base leading-normal md:mt-5 md:text-xl md:leading-normal">
 	Limitless possibilities with no contracts, just a simple monthly fee. We focus on creating
 	high-quality digital solutions.
 </span>
-<div class="flex gap-4 mt-5">
-	<button (click)="goToPlan()" class="flex-initial" type="button">Check our plan</button>
+<div class="flex flex-wrap gap-4 mt-5 md:flex-nowrap">
+	<button (click)="goToPlan()" class="w-full md:w-auto" type="button">Check our plan</button>
 	<button
 		(click)="popup()"
 		type="button"
-		class="inline-flex flex-1 flex-initial items-center gap-x-2 rounded-lg border border-gray-800 px-4 py-3 text-sm font-semibold text-gray-800 hover:border-gray-500 hover:text-gray-500"
+		class="w-full md:w-auto"
 	>
 		Book a call
 	</button>

@@ -35,7 +35,7 @@ import { Meta, Title } from '@angular/platform-browser'
 	],
 	providers: [ScriptStoreService],
 	host: {
-		class: 'antialiased block bg-[#FFFEFC] lg:mt-20 mt-16 lg:px-6 px-4'
+		class: 'antialiased block bg-orange-50 mt-16 md:mt-20  lg:px-6 px-4'
 	}
 })
 export class AppComponent {

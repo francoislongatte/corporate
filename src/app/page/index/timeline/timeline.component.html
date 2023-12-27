@@ -2,7 +2,7 @@
 	<p class="text-xl font-medium tracking-tight leading-tight text-stone-700">How does it work?</p>
 </div>
 
-<ul class="mt-5 text-sm md:mt-8 space-y-8">
+<ul class="mt-5 text-sm space-y-4 :mt-8 md:space-y-8">
 	@for (item of data; track item.text;) {
 	<li class="flex gap-4">
 		<div>
@@ -24,10 +24,10 @@
 			</svg>
 		</div>
 		<div class="flex flex-col items-start gap-2">
-			<p class="text-xl font-medium tracking-tight leading-tight">
+			<p class="text-base font-medium tracking-tight leading-tight mt-0.5 md:mt-0 md:text-xl md:tracking-tight md:leading-tight">
 				{{ item.title }}
 			</p>
-			<p class="text-base leading-normal">
+			<p class="text-sm md:text-base leading-normal">
 				{{ item.text }}
 			</p>
 		</div>
