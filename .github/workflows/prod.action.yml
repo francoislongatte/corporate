@@ -12,8 +12,6 @@ jobs:
       contents: read
     name: deploy on prod
     runs-on: ubuntu-latest
-    env:
-      NAME: "PROD"
     strategy:
       matrix:
         node-version: [18.x]
@@ -28,10 +26,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build:ssr
+      - run: npm run sitemap:prod
       - name: ⚡⚡⚡ serverless Deploy ⚡⚡⚡
         uses: serverless/github-action@v3.2
         with:
-          args: deploy --stage prod
+          args: deploy --param="envName=prod" --stage production
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

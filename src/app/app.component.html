@@ -1,10 +1,54 @@
-<nav
-  Navbar
-  class="relative justify-center items-center w-full mx-auto px-4"
-  aria-label="Global"
-></nav>
-<header header></header>
-<section iconSection></section>
-<div class="testimonials"></div>
-<div class="services"></div>
-<div id="pricing" class="price"></div>
+<section class="block lg:container">
+	<nav Navbar aria-label="Global"></nav>
+	<header header></header>
+</section>
+<section carousel class="-mx-4 overflow-hidden pt-5 md:pt-16 lg:-mx-6"></section>
+<section class="block lg:container">
+	<div class="timeline pt-8 md:pt-16"></div>
+	<div class="capabilities pt-8 md:pt-16"></div>
+	<div class="price mt-8 md:mt-16"></div>
+	<div class="faq pt-8 md:pt-16"></div>
+	<div class="border-b border-stone-200 bg-white py-4">
+		<div class="flex flex-wrap items-center justify-between">
+			<span class="w-full md:w-2/3">Still have questions?</span>
+			<button
+				[secondary]="true"
+				type="button"
+				(click)="popup()"
+				class="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-stone-950 px-8 py-5 text-center text-base font-semibold text-white hover:bg-gray-900 disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 md:mt-0 md:w-1/3"
+			>
+				Book a call
+			</button>
+		</div>
+	</div>
+	<div class="py-4 md:py-8">
+		<div class="flex flex-wrap gap-y-5 md:flex-nowrap md:items-center md:justify-between">
+			<span class="order-2 text-sm text-stone-900 md:order-1 md:basis-auto">{{
+				'Cobuildr @2024 | Belgium'
+			}}</span>
+			<div
+				class="order-1 flex basis-full items-center justify-between md:order-1 md:basis-auto md:items-center"
+			>
+				<span class="text-sm text-stone-900 md:mr-4">Behind the scene</span>
+				<div class="flex items-center gap-x-4">
+					<a href="">
+						<img
+							class="w-8 rounded-full bg-slate-100 md:w-12"
+							width="48"
+							height="48"
+							src="https://picsum.photos/48/48"
+						/>
+					</a>
+					<a>
+						<img
+							class="w-8 rounded-full bg-slate-100 md:w-12"
+							width="48"
+							height="48"
+							src="https://picsum.photos/48/48"
+						/>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

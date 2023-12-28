@@ -1,0 +1,31 @@
+<div class="flex">
+	<p class="text-xl font-medium tracking-tight leading-tight text-stone-700">Our capabilities</p>
+</div>
+
+<div class="mt-5 flex flex-col sm:flex-row md:mt-8" data-hs-accordion-always-open>
+	@for (items of data; track items) {
+	<ul class="flex-1">
+		@for (item of items; track item.title) {
+		<li class="flex gap-2 py-2 text-base leading-tight tracking-tight font-medium content-center items-center">
+			<svg
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<g id="Bullet">
+					<circle id="Circle" cx="12" cy="12" r="12" fill="#FFF0E0" />
+					<path
+						id="Star"
+						d="M12.5024 6H11.5024V10.1373L9.43333 6.55356L8.56731 7.05356L10.6333 10.6319L7.05619 8.56667L6.55619 9.43269L10.1362 11.4996H6V12.4996H10.1322L6.55198 14.5667L7.05198 15.4327L10.6333 13.365L8.56577 16.9461L9.43179 17.4461L11.5024 13.8597V18H12.5024V13.8693L14.5673 17.4459L15.4333 16.9459L13.3653 13.3639L16.9485 15.4327L17.4485 14.5667L13.8683 12.4996H18V11.4996H13.8643L17.4443 9.43269L16.9443 8.56667L13.3653 10.633L15.4318 7.05376L14.5658 6.55376L12.5024 10.1276V6Z"
+						fill="#C76700"
+					/>
+				</g>
+			</svg>
+			<span>{{ item.title }}</span>
+		</li>
+		}
+	</ul>
+	}
+</div>

@@ -1,38 +1,103 @@
-service: ${opt:stage}-ssrserverless-angular
-
+service: ssrserverless-angular
 
 plugins:
   - serverless-apigw-binary
+  - serverless-api-compression
+  - serverless-domain-manager
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x
   memorySize: 192
   timeout: 10
   region: eu-west-1
+  stackName: ${param:envName}-ssrserverless-angular
 
 package:
   exclude:
     - ./**
   include:
-    - "node_modules/aws-serverless-express/**"
-    - "node_modules/binary-case/**"
-    - "node_modules/type-is/**"
-    - "node_modules/media-typer/**"
-    - "node_modules/mime-types/**"
-    - "node_modules/mime-db/**"
-    - "node_modules/@vendia/**"
-    - "dist/**"
-    - "lambda.js"
+    - 'node_modules/aws-serverless-express/**'
+    - 'node_modules/binary-case/**'
+    - 'node_modules/type-is/**'
+    - 'node_modules/media-typer/**'
+    - 'node_modules/mime-types/**'
+    - 'node_modules/mime-db/**'
+    - 'node_modules/@vendia/**'
+    - 'dist/**'
+    - 'handler/**'
 
 custom:
+  contentCompression: 1024
   apigwBinary:
     types:
-      - "*/*"
+      - '*/*'
+  customDomain:
+    domainName: dev.cobuildr.agency
+    basePath: ''
+    endpointType: REGIONAL
+
+resources:
+  Resources:
+    CustomerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: CustomerTable
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    LambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: cobuildr-lambdaRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 'lambda.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: LambdaPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - dynamodb:DescribeTable
+                    - dynamodb:Query
+                    - dynamodb:Scan
+                    - dynamodb:GetItem
+                    - dynamodb:PutItem
+                    - dynamodb:UpdateItem
+                    - dynamodb:DeleteItem
+                    - s3:GetObject
+                    - s3:PutObject
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: '*'
 
 functions:
   api:
-    handler: lambda.handler
+    handler: handler/server.handler
     events:
-      - http: ANY {proxy+}
-      - http: ANY /
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: '{proxy+}'
+          method: ANY
+          cors: true
+    role: LambdaRole
+    tracing: Active

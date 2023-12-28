@@ -1,0 +1,39 @@
+.media-container {
+	width: 100%;
+	position: relative;
+}
+
+.media-group {
+	display: grid;
+	gap: 1.5rem;
+	grid-auto-flow: column;
+}
+
+.media-scroller {
+	overflow-x: hidden;
+	grid-auto-columns: 100%;
+}
+
+.media-group {
+	grid-auto-columns: 100%;
+}
+
+.media-group::before,
+.media-group::after {
+	content: '';
+	background-size: cover;
+	background-position: center;
+}
+
+.media-group::before {
+	background-image: var(--background-carousel-before);
+}
+.media-group::after {
+	background-image: var(--background-carousel-after);
+}
+
+.media-element > img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}

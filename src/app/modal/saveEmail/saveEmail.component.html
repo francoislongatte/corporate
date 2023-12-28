@@ -1,0 +1,53 @@
+<div class="rounded-xl border border-gray-200 bg-white shadow-sm">
+	<div class="p-4 sm:p-7">
+		<div class="text-center">
+			<h2 class="block text-2xl font-bold text-gray-800 dark:text-gray-200">
+				We're getting ready to launch
+			</h2>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+				We're excited about our new subscription box. We hope you are too! Join our mailing list to
+				stay in the loop.
+			</p>
+		</div>
+
+		<div class="mt-5">
+			<!-- Form -->
+			<form>
+				<div class="grid gap-y-4">
+					<!-- Form Group -->
+					<div>
+						<label for="email" class="mb-2 block text-sm dark:text-white">Email address</label>
+						<div class="relative">
+							<input
+								type="email"
+								id="email"
+								name="email"
+								[(ngModel)]="email"
+								class="block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
+								required
+								aria-describedby="email-error"
+							/>
+						</div>
+						@if (payload.state === 'success') {
+						<p class="mt-2 text-sm text-green-600">
+							{{ payload.message }}
+						</p>
+						} @else if(payload.state === 'error'){
+						<p class="mt-2 text-sm text-red-600">
+							{{ payload.message }}
+						</p>
+						}
+					</div>
+					<button
+						(click)="saveEmail()"
+						type="submit"
+						class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+					>
+						Join
+					</button>
+				</div>
+			</form>
+			<!-- End Form -->
+		</div>
+	</div>
+</div>

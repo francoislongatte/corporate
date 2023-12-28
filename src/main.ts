@@ -1,7 +1,10 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppComponent } from './app/app.component'
+import { importProvidersFrom } from '@angular/core'
+import { HttpClientModule } from '@angular/common/http'
 
-import { AppModule } from './app/app.module';
+import { bootstrapApplication } from '@angular/platform-browser'
+import { provideClientHydration } from '@angular/platform-browser'
 
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+	providers: [provideClientHydration(), importProvidersFrom(HttpClientModule)]
+}).catch((err) => console.error(err))

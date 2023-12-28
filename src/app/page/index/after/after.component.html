@@ -1,0 +1,15 @@
+<div class="flex">
+	<p class="pr-4 text-xl font-semibold leading-none">After subscribing</p>
+	<span class="block flex-1 border-b-2 border-stone-300"></span>
+</div>
+
+<ul class="pt-5 md:pt-8">
+	@for (item of data; track item;) {
+	<li class="flex items-center py-5 text-3xl font-semibold lg:py-8">
+		<span class="mr-4 h-6 w-6 rounded-full bg-orange-500 text-xl md:h-12 md:w-12 md:text-3xl">
+		</span>
+		{{ item }}
+	</li>
+
+	}
+</ul>

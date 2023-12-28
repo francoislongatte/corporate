@@ -1,0 +1,26 @@
+<div class="media-container">
+	<div class="media-scroller">
+		<!--   Group 1 -->
+		<div
+			class="media-group container animate-carousel"
+			style="
+				--background-carousel-before: url('assets/img/carousel/optim/03.webp');
+				--background-carousel-after: url('assets/img/carousel/optim/02.webp');
+			"
+			id="group-1"
+		>
+			@for (item of links; track item; let idx = $index) {
+			<div class="media-element overflow-hidden rounded-xl">
+				<img
+					priority
+					[ngSrc]="item"
+					[alt]="'picture ' + idx"
+					width="450"
+					height="337"
+					class="h-full w-full object-cover"
+				/>
+			</div>
+			}
+		</div>
+	</div>
+</div>

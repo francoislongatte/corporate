@@ -1,0 +1,38 @@
+<div class="flex">
+	<p class="text-xl font-medium tracking-tight leading-tight text-stone-700">FAQ</p>
+</div>
+
+<div class="hs-accordion-group pt-5 md:pt-8" data-hs-accordion-always-open>
+	@for (item of data; track item.text; let idx = $index) {
+	<div class="hs-accordion border-b-[1px] border-stone-200" [id]="'heading-' + idx">
+		<button
+			class="hs-accordion-toggle inline-flex w-full items-center justify-between py-4 md:py-5 text-start"
+			[attr.aria-controls]="'heading-one-collapse-' + idx"
+		>
+			<span class="text-base font-medium tracking-tight text-stone-900 md:text-xl">{{ item.title }}</span>
+			<div class="flex items-center">
+				<span
+					class="text-xl flex h-6 w-6 items-center justify-center hs-accordion-active:border-0 md:text-3xl"
+				>
+					<ng-icon class="hs-accordion-active:hidden" name="heroPlusSolid"></ng-icon>
+					<ng-icon
+						disabled
+						class="hidden hs-accordion-active:inline-block"
+						name="heroMinusSolid"
+					></ng-icon>
+				</span>
+			</div>
+		</button>
+		<div
+			[id]="'heading-one-collapse-' + idx"
+			class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+			[attr.aria-labelledby]="'heading-' + idx"
+		>
+			<p
+				[innerHTML]="item.text"
+				class="pb-5 text-base font-normal leading-relaxed text-stone-900 md:pb-8 md:text-xl md:leading-normal"
+			></p>
+		</div>
+	</div>
+	}
+</div>
