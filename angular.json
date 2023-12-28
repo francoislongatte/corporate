@@ -24,6 +24,16 @@
 					},
 					"configurations": {
 						"production": {
+							"assets": [
+								"src/favicon.ico",
+								"src/assets",
+								"src/sitemap.xml",
+								{
+									"glob": "robots.txt",
+									"input": "src/robots/prod/",
+									"output": "./"
+								}
+							],
 							"optimization": true,
 							"buildOptimizer": true,
 							"vendorChunk": true,
@@ -33,6 +43,16 @@
 							"outputHashing": "none"
 						},
 						"development": {
+							"assets": [
+								"src/favicon.ico",
+								"src/assets",
+								"src/sitemap.xml",
+								{
+									"glob": "robots.txt",
+									"input": "src/robots/dev/",
+									"output": "./"
+								}
+							],
 							"buildOptimizer": false,
 							"optimization": false,
 							"vendorChunk": false,
