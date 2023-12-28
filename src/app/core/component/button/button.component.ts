@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core'
 
 @Component({
 	selector: 'button',
@@ -9,4 +9,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 	styleUrl: './button.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent {}
+export class ButtonComponent {
+	@Input() secondary: boolean = false
+	@HostBinding('class.secondary') get secondaryClass() {
+		return this.secondary
+	}
+}
