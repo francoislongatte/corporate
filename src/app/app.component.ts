@@ -35,12 +35,11 @@ import { Meta, Title } from '@angular/platform-browser'
 	],
 	providers: [ScriptStoreService],
 	host: {
+		ngSkipHydration: 'true',
 		class: 'antialiased block bg-orange-50 mt-16 md:mt-20  lg:px-6 px-4'
 	}
 })
 export class AppComponent {
-	email = new FormControl('')
-
 	constructor(
 		private metaTagService: Meta,
 		private titleService: Title,
@@ -57,15 +56,15 @@ export class AppComponent {
 			{ name: 'date', content: '2023-12-21', scheme: 'YYYY-MM-DD' },
 			{ charset: 'UTF-8' },
 			/// Facebook
-			{ name: 'og:title', content: 'Add title here'},
-			{ name: 'og:description', content: 'Add description here'},
-			{ name: 'og:image', content: 'https://your-website.com/og-image.png'},
-			{ name: 'og:url', content: 'https://your-website.com'},
+			{ name: 'og:title', content: 'Add title here' },
+			{ name: 'og:description', content: 'Add description here' },
+			{ name: 'og:image', content: 'https://your-website.com/og-image.png' },
+			{ name: 'og:url', content: 'https://your-website.com' },
 			/// Twitter
-			{ name: 'twitter:title', content: 'Add title here'},
-			{ name: 'twitter:description', content: 'Add description here'},
-			{ name: 'twitter:url', content: 'https://your-website.com/twitter-image.png'},
-			{ name: 'twitter:card', content: 'summary'},
+			{ name: 'twitter:title', content: 'Add title here' },
+			{ name: 'twitter:description', content: 'Add description here' },
+			{ name: 'twitter:url', content: 'https://your-website.com/twitter-image.png' },
+			{ name: 'twitter:card', content: 'summary' }
 		])
 	}
 
