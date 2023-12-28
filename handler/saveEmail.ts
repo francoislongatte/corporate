@@ -9,7 +9,7 @@ function isValidEmail(email: string): boolean {
 	return emailRegex.test(email)
 }
 
-const dynamoDBTableName = process.env['DynamoDBTableName']
+const dynamoDBTableName = process.env['DYNAMODB_TABLE_NAME']
 
 export const saveEmail = async (req: any, res: any): Promise<any> => {
 	try {
