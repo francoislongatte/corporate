@@ -99,7 +99,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ssrserverless-angular/dev/1703805559888-2023-12-28T23:19:19.888Z/ssrserverless-angular.zip"
+                "S3Key": "serverless/ssrserverless-angular/dev/1703806660469-2023-12-28T23:37:40.469Z/ssrserverless-angular.zip"
               },
               "Handler": "handler/server.handler",
               "Runtime": "nodejs16.x",
@@ -352,7 +352,7 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1703805523713": {
+          "ApiGatewayDeployment1703806627512": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -608,6 +608,10 @@
       "vpc": {}
     },
     "custom": {
+      "customDomaineName": {
+        "dev": "dev.cobuildr.agency",
+        "production": "cobuildr.agency"
+      },
       "contentCompression": 1024,
       "apigwBinary": {
         "types": [
@@ -797,7 +801,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/ssrserverless-angular/dev/code-artifacts",
         "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip",
-        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1703805559888-2023-12-28T23:19:19.888Z"
+        "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1703806660469-2023-12-28T23:37:40.469Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -814,7 +818,7 @@
     "artifact": "C:\\Users\\francois.longatte\\project\\angular-universal\\.serverless\\ssrserverless-angular.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1703805559888-2023-12-28T23:19:19.888Z",
+    "artifactDirectoryName": "serverless/ssrserverless-angular/dev/1703806660469-2023-12-28T23:37:40.469Z",
     "artifact": "ssrserverless-angular.zip"
   }
 }
