@@ -56,7 +56,7 @@ resources:
     LambdaRole:
       Type: AWS::IAM::Role
       Properties:
-        RoleName: cobuildr-lambdaRole
+        RoleName: ${opt:stage}-Cobuildr-lambdaRole
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -101,5 +101,5 @@ functions:
           path: '{proxy+}'
           method: ANY
           cors: true
-    role: LambdaRole
+    role: ${opt:stage}-Cobuildr-lambdaRole
     tracing: Active
