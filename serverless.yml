@@ -33,7 +33,7 @@ custom:
     types:
       - '*/*'
   customDomain:
-    domainName: dev.cobuildr.agency
+    domainName: ${opt:stage}.cobuildr.agency
     basePath: ''
     endpointType: REGIONAL
 
@@ -101,5 +101,5 @@ functions:
           path: '{proxy+}'
           method: ANY
           cors: true
-    role: ${opt:stage}-Cobuildr-lambdaRole
+    role: LambdaRole
     tracing: Active
