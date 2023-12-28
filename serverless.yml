@@ -37,12 +37,18 @@ custom:
     basePath: ''
     endpointType: REGIONAL
 
+Parameters:
+  DynamoDBTableName:
+    Type: String
+    Description: 'The name of the DynamoDB table'
+    Default: '${param:envName}-CustomerTable'
+
 resources:
   Resources:
     CustomerTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: CustomerTable
+        TableName: !Ref DynamoDBTableName
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
