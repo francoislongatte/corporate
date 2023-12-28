@@ -28,12 +28,15 @@ package:
     - 'handler/**'
 
 custom:
+  customDomaineName:
+    dev: dev.cobuildr.agency
+    production: cobuildr.agency
   contentCompression: 1024
   apigwBinary:
     types:
       - '*/*'
   customDomain:
-    domainName: ${opt:stage}.cobuildr.agency
+    domainName: ${self:custom.customDomaineName.${opt:stage}}
     basePath: ''
     endpointType: REGIONAL
 
