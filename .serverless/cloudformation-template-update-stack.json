@@ -84,7 +84,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1703755871478-2023-12-28T09:31:11.478Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1703797027674-2023-12-28T20:57:07.674Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/server.handler",
         "Runtime": "nodejs16.x",
@@ -111,14 +111,14 @@
         "LambdaRole"
       ]
     },
-    "ApiLambdaVersionFBEMQnG2q2NGg2ZSUZPGB4CMEfu2EIRiCUnPrKhFY": {
+    "ApiLambdaVersionoZl7KWhVJoYKHn780y0kj23DiqftVWTzARuV44hlCiw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "4IrXCMyw7VpZ9t8qGJvXKU5763JxMD1uxRIfbj6WCWM="
+        "CodeSha256": "DKHYwN9pPOZpIndEH8cRtO7zW6CMinfvv0Da+lPRzbg="
       }
     },
     "ApiGatewayRestApi": {
@@ -337,7 +337,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1703755838785": {
+    "ApiGatewayDeployment1703796995436": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -474,7 +474,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionFBEMQnG2q2NGg2ZSUZPGB4CMEfu2EIRiCUnPrKhFY"
+        "Ref": "ApiLambdaVersionoZl7KWhVJoYKHn780y0kj23DiqftVWTzARuV44hlCiw"
       },
       "Export": {
         "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"

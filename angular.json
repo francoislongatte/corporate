@@ -29,14 +29,15 @@
 							"vendorChunk": true,
 							"extractLicenses": false,
 							"namedChunks": true,
-							"sourceMap": true
+							"sourceMap": false,
+							"outputHashing": "none"
 						},
 						"development": {
 							"buildOptimizer": false,
 							"optimization": false,
-							"vendorChunk": true,
+							"vendorChunk": false,
 							"extractLicenses": false,
-							"sourceMap": true,
+							"sourceMap": false,
 							"namedChunks": false
 						}
 					},

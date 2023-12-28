@@ -1,7 +1,3 @@
 :host {
 	display: block;
 }
-:host div {
-	background-color: white;
-	overflow: hidden;
-}
