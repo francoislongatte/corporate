@@ -11,7 +11,7 @@ provider:
   memorySize: 192
   timeout: 10
   region: eu-west-1
-  stackName: ${param:envName}-ssrserverless-angular
+  stackName: ${opt:stage}-ssrserverless-angular
 
 package:
   exclude:
@@ -42,7 +42,7 @@ resources:
     CustomerTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: CustomerTable
+        TableName: ${opt:stage}-CustomerTable
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
@@ -90,6 +90,8 @@ resources:
 functions:
   api:
     handler: handler/server.handler
+    environment:
+      DYNAMODB_TABLE_NAME: ${opt:stage}-CustomerTable
     events:
       - http:
           path: /

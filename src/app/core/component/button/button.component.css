@@ -31,6 +31,8 @@
 	background: radial-gradient(43.27% 43.27% at 50% 6.73%, #f0f0ef 0%, #fefefe 100%),
 		var(--Grey-Grey---50, #fefefe);
 	box-shadow:
+		inset 0px 1px 0 #FEFEFE,
+		inset 0px 2px 0 #F0F0EF,
 		0px 1px 2px 0px rgba(187, 184, 180, 0.1),
 		0px 4px 4px 0px rgba(187, 184, 180, 0.09),
 		0px 9px 6px 0px rgba(187, 184, 180, 0.05),
@@ -44,14 +46,6 @@
 	border-radius: 1rem;
 	border: 1px solid var(--Grey-Grey---200, #d6d4d1);
 	background: var(--Grey-Grey---100, #f0f0ef);
-
-	/* Button/Light */
-	box-shadow:
-		0px 1px 2px 0px rgba(187, 184, 180, 0.1),
-		0px 4px 4px 0px rgba(187, 184, 180, 0.09),
-		0px 9px 6px 0px rgba(187, 184, 180, 0.05),
-		0px 17px 7px 0px rgba(187, 184, 180, 0.01),
-		0px 26px 7px 0px rgba(187, 184, 180, 0);
 }
 
 :host:hover {

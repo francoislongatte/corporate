@@ -84,7 +84,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/ssrserverless-angular/dev/1702827830043-2023-12-17T15:43:50.043Z/ssrserverless-angular.zip"
+          "S3Key": "serverless/ssrserverless-angular/dev/1703799520576-2023-12-28T21:38:40.576Z/ssrserverless-angular.zip"
         },
         "Handler": "handler/server.handler",
         "Runtime": "nodejs16.x",
@@ -93,6 +93,11 @@
         "Timeout": 10,
         "TracingConfig": {
           "Mode": "Active"
+        },
+        "Environment": {
+          "Variables": {
+            "DYNAMODB_TABLE_NAME": "dev-CustomerTable"
+          }
         },
         "Role": {
           "Fn::GetAtt": [
@@ -106,14 +111,14 @@
         "LambdaRole"
       ]
     },
-    "ApiLambdaVersion5sT8u8IiYVDZCf9wQeY6a9YgLXGwAVNZeBUgoLfNGRI": {
+    "ApiLambdaVersionKPczTSZ9YotlfSRx7Pn0YvDChTHM5HyfuO0CnLp41g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "r4SF1oXEqB4UNKAQLfx+lt5KvPM+5dVcn2G1mioZl+w="
+        "CodeSha256": "DGfKIhAZlSIh0/gnkviwk907BtJ9Jt1tVGl+a9MkBC8="
       }
     },
     "ApiGatewayRestApi": {
@@ -332,7 +337,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1702827788966": {
+    "ApiGatewayDeployment1703799488969": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -387,7 +392,7 @@
     "CustomerTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "TableName": "CustomerTable",
+        "TableName": "dev-CustomerTable",
         "AttributeDefinitions": [
           {
             "AttributeName": "email",
@@ -469,7 +474,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersion5sT8u8IiYVDZCf9wQeY6a9YgLXGwAVNZeBUgoLfNGRI"
+        "Ref": "ApiLambdaVersionKPczTSZ9YotlfSRx7Pn0YvDChTHM5HyfuO0CnLp41g"
       },
       "Export": {
         "Name": "sls-ssrserverless-angular-dev-ApiLambdaFunctionQualifiedArn"

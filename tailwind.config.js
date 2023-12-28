@@ -8,15 +8,18 @@ module.exports = {
 	theme: {
 		colors: {
 			transparent: 'transparent',
-      		current: 'currentColor',
-			'stone': colors.stone,
-			'orange': {
+			current: 'currentColor',
+			white: '#ffffff',
+			green: colors.green,
+			red: colors.red,
+			stone: colors.stone,
+			orange: {
 				50: '#FFFEFC',
 				100: '#FFF0E0',
-        		200: '#FFD5A8',
-        		300: '#FFBA70',
-        		400: '#FF9F38',
-        		500: '#FF8400',
+				200: '#FFD5A8',
+				300: '#FFBA70',
+				400: '#FF9F38',
+				500: '#FF8400',
 				600: '#C76700',
 				700: '#8F4A00',
 				800: '#572D00',

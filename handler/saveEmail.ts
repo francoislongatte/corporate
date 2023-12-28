@@ -9,8 +9,14 @@ function isValidEmail(email: string): boolean {
 	return emailRegex.test(email)
 }
 
+const dynamoDBTableName = process.env['DynamoDBTableName']
+
 export const saveEmail = async (req: any, res: any): Promise<any> => {
 	try {
+		if (!dynamoDBTableName) {
+			throw new Error('Missing TableName property')
+		}
+
 		if (!req.body || !req.body.email) {
 			throw new Error('Missing email property')
 		}
@@ -20,7 +26,7 @@ export const saveEmail = async (req: any, res: any): Promise<any> => {
 		}
 
 		const params = {
-			TableName: 'CustomerTable',
+			TableName: dynamoDBTableName,
 			Item: {
 				email: req.body.email,
 				createdAt: Date.now()
@@ -29,7 +35,7 @@ export const saveEmail = async (req: any, res: any): Promise<any> => {
 
 		await dynamoDB
 			.put({
-				TableName: params.TableName,
+				TableName: params.TableName || '',
 				Item: {
 					email: params.Item.email,
 					createdAt: params.Item.createdAt
