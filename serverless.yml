@@ -27,8 +27,11 @@ package:
     - 'dist/**'
     - 'handler/**'
 
+conditions:
+  cloudfrontCondition: ${opt:stage, 'dev'} == 'production'
+
 custom:
-  customDomaineName:
+  customDomainName:
     dev: dev.cobuildr.agency
     production: cobuildr.agency
   contentCompression: 1024
@@ -36,7 +39,7 @@ custom:
     types:
       - '*/*'
   customDomain:
-    domainName: ${self:custom.customDomaineName.${opt:stage}}
+    domainName: ${self:custom.customDomainName.${opt:stage}}
     basePath: ''
     endpointType: REGIONAL
 
