@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common'
 interface Scripts {
 	name: string
 	src: string
+	type: string
 	loaded?: boolean
 }
 
@@ -13,15 +14,30 @@ export class ScriptStoreService {
 
 	scriptStore: { [key: string]: Scripts[] } = {
 		init: [
-			{ name: 'googleAnalytics', src: 'https://www.googletagmanager.com/gtag/js?id=G-9CFF4D6N19' },
-			{ name: 'googleAnalyticsScript', src: '../../assets/scripts/googleAnalytics.js' }
+			{
+				type: 'link',
+				name: 'googleAnalytics',
+				src: 'https://www.googletagmanager.com/gtag/js?id=G-9CFF4D6N19'
+			},
+			{
+				type: 'link',
+				name: 'googleAnalyticsScript',
+				src: '../../assets/scripts/googleAnalytics.js'
+			}
 		],
-		click: [{ name: 'calendly', src: 'https://assets.calendly.com/assets/external/widget.js' }]
+		click: [
+			{
+				type: 'script',
+				name: 'calendly',
+				src: 'https://assets.calendly.com/assets/external/widget.js'
+			}
+		]
 	}
 
 	constructor(@Inject(DOCUMENT) private document: Document) {
 		this.scriptStore['init'].forEach((script) => {
 			this.scripts.push({
+				type: script.type,
 				name: script.name,
 				loaded: false,
 				src: script.src
@@ -45,6 +61,7 @@ export class ScriptStoreService {
 				(script) => script?.name == name
 			) || {
 				name: '',
+				type: 'script',
 				loaded: false,
 				src: ''
 			}
@@ -67,15 +84,21 @@ export class ScriptStoreService {
 			if (findScript?.loaded) {
 				resolve({ script: name, loaded: true })
 			} else {
-				let script = this.document.createElement('script')
+				let script = this.document.createElement(findScript!.type)
 				script.setAttribute('type', 'text/javascript')
 				script.setAttribute('src', findScript!.src)
-				script.setAttribute('defer', '')
+				if (findScript!.type === 'link') {
+					script.setAttribute('rel', 'dns-prefetch')
+					this.document.getElementsByTagName('head')[0].appendChild(script)
+				} else {
+					script.setAttribute('defer', 'true')
+					this.document.getElementsByTagName('body')[0].appendChild(script)
+				}
+
 				script.onload = () => {
 					findScript!.loaded = true
 					resolve({ script: name, loaded: true })
 				}
-				this.document.getElementsByTagName('body')[0].appendChild(script)
 			}
 		})
 	}
