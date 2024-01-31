@@ -8,7 +8,7 @@ import { CardComponent } from './card/card.component'
 	standalone: true,
 	styleUrl: 'carousel.component.css',
 	imports: [NgFor, CardComponent, NgOptimizedImage],
-	providers: [ScriptStoreService],
+	providers: [],
 	templateUrl: './carousel.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -33,7 +33,7 @@ import { Meta, Title } from '@angular/platform-browser'
 		CommonModule,
 		ButtonComponent
 	],
-	providers: [ScriptStoreService],
+	providers: [],
 	host: {
 		class: 'antialiased block bg-orange-50 mt-16 md:mt-20  lg:px-6 px-4'
 	}

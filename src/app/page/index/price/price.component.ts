@@ -10,7 +10,7 @@ import { ScriptStoreService } from 'src/app/core/service/scriptStore.service'
 	selector: '.price',
 	standalone: true,
 	imports: [DialogModule, ButtonComponent],
-	providers: [ScriptStoreService],
+	providers: [],
 	templateUrl: './price.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

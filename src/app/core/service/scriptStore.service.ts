@@ -8,7 +8,9 @@ interface Scripts {
 	loaded?: boolean
 }
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class ScriptStoreService {
 	private scripts: Scripts[] = []
 
