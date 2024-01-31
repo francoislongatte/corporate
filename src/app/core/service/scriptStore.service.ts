@@ -15,12 +15,12 @@ export class ScriptStoreService {
 	scriptStore: { [key: string]: Scripts[] } = {
 		init: [
 			{
-				type: 'link',
+				type: 'script',
 				name: 'googleAnalytics',
 				src: 'https://www.googletagmanager.com/gtag/js?id=G-9CFF4D6N19'
 			},
 			{
-				type: 'link',
+				type: 'script',
 				name: 'googleAnalyticsScript',
 				src: '../../assets/scripts/googleAnalytics.js'
 			}
@@ -91,7 +91,7 @@ export class ScriptStoreService {
 					script.setAttribute('rel', 'dns-prefetch')
 					this.document.getElementsByTagName('head')[0].appendChild(script)
 				} else {
-					script.setAttribute('defer', 'true')
+					script.setAttribute('async', '')
 					this.document.getElementsByTagName('body')[0].appendChild(script)
 				}
 
