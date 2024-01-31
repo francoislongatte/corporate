@@ -7,7 +7,7 @@ import { ScriptStoreService } from 'src/app/core/service/scriptStore.service'
 @Component({
 	selector: '[header]',
 	imports: [NgFor, ButtonComponent, RouterLink],
-	providers: [ScriptStoreService],
+	providers: [],
 	standalone: true,
 	templateUrl: './header.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
